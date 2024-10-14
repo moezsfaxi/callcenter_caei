@@ -61,7 +61,7 @@ Route::middleware(['auth','superviseur'])->group(function(){
 
 Route::middleware(['auth','admin'])->group(function(){
     Route::get('/admin-dashboard',[dashboardController::class ,'admindashboard'] )->name('admindashboard-login');
-    Route::get('/all-admin-rdv-pompe-a-chaleur', [RdvPompeAChaleurController::class, 'index'])->name('admin-rdv-pompe-a-chaleur.index');
+    Route::get('/all-admin-rdv-pompe-a-chaleur', [RdvPompeAChaleurController::class, 'index'])->name('admin-rdv-pompe-a-a-chaleur.index');
     Route::get('/all-admin-rdv-panneaux-photovoltaique', [RdvPanneauxPhotovoltaiqueController::class, 'index'])->name('admin-rdv-panneaux-photovoltaique.index');
     Route::get('/all-admin-rdv-thermostat', [RdvThermostatController::class, 'index'])->name('admin-rdv-thermostat.index');
 });
