@@ -34,13 +34,13 @@ class AuthenticatedSessionController extends Controller
        
         switch ($role) {
             case 'agent':
-                return redirect()->route('agent-dashboard');
+                return redirect()->route('agentdashboard-login');
             case 'admin':
-                return redirect()->route('admin-dashboard');
+                return redirect()->route('admindashboard-login');
             case 'partenaire':
-                return redirect()->route('partenaire-dashboard');
+                return redirect()->route('partenairedashboard-login');
             case 'superviseur':
-                return redirect()->route('superviseur-dashboard');
+                return redirect()->route('superviseurdashboard-login');
             default:
                 return redirect()->route('dashboard');
         }
