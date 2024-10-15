@@ -35,6 +35,17 @@ class RdvPompeAChaleurController extends Controller
         'statut_de_residence' => 'required|string',
         'Commentaire_agent' => 'nullable|string',
     ]);
+    // Vérification si le numéro de téléphone existe déjà dans la base de données
+    $existingRdv = dvPompeAChaleur::where('telephone', $request->telephone)->first();
+
+    if ($existingRdv) {
+        // Si le numéro de téléphone existe déjà, on redirige avec un message d'erreur
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['telephone' => 'Ce numéro de téléphone a déjà été utilisé pour un autre rendez-vous.']);
+    }
+    $validatedData['agent_id'] = Auth::id();
+
     $rdv = RdvPompeAChaleur::create($validatedData);
     return redirect()->route('dashboard')->with('success', 'RDV created successfully');
 }
