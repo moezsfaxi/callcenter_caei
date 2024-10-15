@@ -25,11 +25,13 @@ Route::middleware(['auth','agent'])->group(function(){
 Route::get('agent/dashboard',[dashboardController::class ,'agentdashboard'] )->name('agent-dashboard-login');
 Route::post('agent-rdv-panneaux-photovoltaique',[RdvPanneauxPhotovoltaiqueController::class ,'store'])->name('rdv-panneaux-photovoltaique.store');
 Route::post('agent-rdv-pompe-a-chaleur',[RdvPompeAChaleurController::class,'store'])->name('rdv-pompe-a-chaleur.store');
+Route::get('/rdv-thermostat/create', [RdvThermostatController::class, 'create'])->name('rdv.thermostat.create');
 Route::post('agent-rdv-thermostat',[RdvThermostatController::class,'store'])->name('rdv-thermostat.store');
 Route::get('/rdv-pompe-a-chaleur/agent', [RdvPompeAChaleurController::class, 'getRdvByAgent'])->name('rdv.PompeAChaleurAgent');
 Route::get('/rdv-panneaux-photovoltaique/agent', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvByAgent'])->name('rdv.PanneauxPhotovoltaiqueAgent');
 Route::get('/rdv-thermostat/agent', [RdvThermostatController::class, 'getRdvByAgent'])->name('rdv.ThermostatAgent');
-
+Route::get('/rdv-pompe-a-chaleur/create', [RdvPompeAChaleurController::class, 'create'])->name('rdv.pompe-a-chaleur.create');
+Route::get('/rdv-panneaux-photovoltaique/create', [RdvPanneauxPhotovoltaiqueController::class, 'create'])->name('rdv.panneaux-photovoltaique.create');
 
 });
 Route::middleware(['auth','partenaire'])->group(function(){

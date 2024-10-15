@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('rdv_thermostats', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('agent_id'); 
-            $table->unsignedBigInteger('partenaire_id');
+            $table->unsignedBigInteger('agent_id');
+            $table->unsignedBigInteger('partenaire_id')->nullable();
             $table->text('nom_du_prospect');
             $table->text('prenom_du_prospect');
             $table->string('telephone');
@@ -21,10 +21,10 @@ return new class extends Migration
             $table->date('date_du_rdv');
             $table->text('statut_de_residence');
             $table->text('Commentaire_agent') ;
-            $table->text('Commentaire_partenaire') ;
-            $table->text('classification') ;
-            $table->text('date_classification') ;
-            $table->text('date_rappelle') ;
+            $table->text('Commentaire_partenaire')->nullable() ;
+            $table->text('classification')->nullable() ;
+            $table->text('date_classification')->nullable() ;
+            $table->text('date_rappelle')->nullable() ;
             $table->timestamps();
         }
     );
