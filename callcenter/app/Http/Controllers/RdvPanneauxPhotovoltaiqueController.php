@@ -7,14 +7,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RdvPanneauxPhotovoltaique;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class RdvPanneauxPhotovoltaiqueController extends Controller
 {
 
     public function index()
     {
-        $rdvRecords = RdvPanneauxPhotovoltaique::all();
-        return view('your-view-name', compact('rdvRecords'));
+        $rdvRecords = RdvPanneauxPhotovoltaique::orderBy('created_at', 'desc')->paginate(20);
+        $partenaires = User::where('role', 'partenaire')->get();
+
+        return view('superviseur.indexpanneau', compact('rdvRecords', 'partenaires'));
     }
 
     public function create()
@@ -54,7 +57,7 @@ class RdvPanneauxPhotovoltaiqueController extends Controller
     $rdv = RdvPanneauxPhotovoltaique::create($validatedData);
 
 
-    return redirect()->route('dashboard')->with('success', 'RDV created successfully');
+    return redirect()->route('rdv.PanneauxPhotovoltaiqueAgent')->with('success', 'RDV created successfully');
 }
 
 public function update(Request $request, $id)
@@ -79,7 +82,7 @@ public function assignrdv(Request $request, $id)
 {
 
     $validatedData = $request->validate([
-        'partenaire_id' => 'nullable| numeric',
+        'partenaire_id' => 'required| numeric',
 
     ]);
 
@@ -89,7 +92,7 @@ public function assignrdv(Request $request, $id)
 
     $rdv->update($validatedData);
 
-    return redirect()->route('dashboard')->with('success', 'RDV updated successfully');
+    return redirect()->route('superviseur-rdv-panneaux-photovoltaique.index')->with('success', 'RDV updated successfully');
 }
 
    public function getRdvByAgent()

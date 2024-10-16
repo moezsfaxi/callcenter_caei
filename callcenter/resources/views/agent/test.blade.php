@@ -193,22 +193,17 @@
 								<!--end:Menu item-->
 								<!--begin:Menu item-->
 								<div class="menu-item">
-
 									<!--begin:Menu link-->
 									<a class="menu-link" href="{{ route('rdv.ThermostatAgent') }}">
-
 										<span class="menu-icon">
-											<i class="ki-duotone ki-temperature fs-1">
-
+											<i class="ki-duotone ki-thermometer fs-1">
 												<span class="path1"></span>
 												<span class="path2"></span>
 											</i>
 										</span>
 										<span class="menu-title">Rendez-vous Thermostat</span>
 									</a>
-
-
-                                    <!--end:Menu link-->
+									<!--end:Menu link-->
 								</div>
 								<!--end:Menu item-->
 								<!--begin:Menu item-->
@@ -241,6 +236,39 @@
 											</i>
 										</span>
 										<span class="menu-title">Rendez vous Pompe à Chaleur</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
+
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									  <a class="menu-link" href="#">
+										<span class="menu-icon">
+											<i class="ki-duotone ki-check-square fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+										</span>
+										<span class="menu-title">Demande d'autorisation</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
+
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									 <a class="menu-link" href="#">
+										<span class="menu-icon">
+											<i class="ki-duotone ki-dollar fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+											</i>
+										</span>
+										<span class="menu-title">Demande d'avance</span>
 									</a>
 									<!--end:Menu link-->
 								</div>
