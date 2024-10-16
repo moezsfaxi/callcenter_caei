@@ -8,10 +8,15 @@ use App\Models\RdvThermostat;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+
 class RdvThermostatController extends Controller
 {
     public function index()
     {
+        $rdvRecords = RdvThermostat::orderBy('created_at', 'desc')->paginate(20);
+        $partenaires = User::where('role', 'partenaire')->get();
+
+        return view('superviseur.indexrdvthermostat', compact('rdvRecords', 'partenaires'));
         $rdvRecords = RdvThermostat::orderBy('created_at', 'desc')->paginate(20);
         $partenaires = User::where('role', 'partenaire')->get();
 
@@ -64,6 +69,7 @@ class RdvThermostatController extends Controller
 
     $validatedData = $request->validate([
         'Commentaire_partenaire' => 'required|string',
+        'Commentaire_partenaire' => 'required|string',
         'classification' => 'required|string',
         'date_rappelle' => 'required|date',
     ]);
@@ -85,16 +91,20 @@ public function getRdvByAgent()
     $rdvRecords = RdvThermostat::where('agent_id', $userId)->get();
     return view('agent.indexthermostat', compact('rdvRecords'));
 }
-public function getRdvForPartenaire()
-{
-    $userId = Auth::id(); // Récupère l'ID de l'utilisateur connecté
-    // Récupère les RDV non qualifiés pour le partenaire
-    $rdvRecords = RdvThermostat::where('partenaire_id', $userId)
-        ->whereNull('classification') // Filtre pour les RDV non qualifiés
-        ->get();
+public function getRdvForPartenaireclassification()
+    {
+        $userId = Auth::id();
+        $rdvRecords = RdvThermostat::where('partenaire_id', $userId)->whereNotNull('classification')->get();
+        return view('your-view-name', compact('rdvRecords'));
+    }
+    public function getRdvForPartenairewithoutclassification()
+    {
+        $userId = Auth::id();
+        $rdvRecords = RdvThermostat::where('partenaire_id', $userId)->whereNull('classification')->get();
+        return view('your-view-name', compact('rdvRecords'));
+    }
 
-    return view('partenaire.indexthermostat', compact('rdvRecords')); // Renvoie la vue avec les RDV non qualifiés
-}
+
     public function destroy($id)
     {
 
@@ -103,16 +113,19 @@ public function getRdvForPartenaire()
         return redirect()->route('dashboard')->with('success', 'RDV deleted successfully');
     }
     public function assignrdv(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'partenaire_id' => 'required|numeric',
-        ]);
+{
 
-        $rdv = RdvThermostat::findOrFail($id);
-        $rdv->update($validatedData);
+    $validatedData = $request->validate([
+        'partenaire_id' => 'nullable| numeric',
 
-        return redirect()->route('superviseur-rdv-thermostat.index')->with('success', 'RDV updated successfully');
-    }
+    ]);
+
+    $rdv = RdvThermostat::findOrFail($id);
+    $rdv->update($validatedData);
+
+    return redirect()->route('dashboard')->with('success', 'RDV updated successfully');
+
+}
 
 
 }

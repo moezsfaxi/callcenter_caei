@@ -46,4 +46,46 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function rdvPanneauxPhotovoltaiquesAsAgent()
+    {   
+        
+        return $this->hasMany(RdvPanneauxPhotovoltaique::class, 'agent_id');
+    }
+
+    // Define the relation for partenaire
+    public function rdvPanneauxPhotovoltaiquesAsPartenaire()
+    {
+        return $this->hasMany(RdvPanneauxPhotovoltaique::class, 'partenaire_id');
+    }
+
+    public function RdvPompeAChaleurAsAgent()
+    {
+        return $this->hasMany(RdvPompeAChaleur::class, 'agent_id');
+    }
+
+    // Define the relation for partenaire
+    public function RdvPompeAChaleurAsPartenaire()
+    {
+        return $this->hasMany(RdvPompeAChaleur::class, 'partenaire_id');
+    }
+
+    public function RdvThermostatAsAgent()
+    {
+        return $this->hasMany(RdvThermostat::class, 'agent_id');
+    }
+
+    // Define the relation for partenaire
+    public function RdvThermostatAsPartenaire()
+    {
+        return $this->hasMany(RdvThermostat::class, 'partenaire_id');
+    }
+
+
+
+
+
+
+
+
 }

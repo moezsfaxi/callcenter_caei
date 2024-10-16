@@ -102,5 +102,18 @@ public function getRdvByAgent()
     }
 
 
+public function getRdvForPartenaireclassification()
+    {
+        $userId = Auth::id();
+        $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)->whereNotNull('classification')->get();
+        return view('your-view-name', compact('rdvRecords'));
+    }
+    public function getRdvForPartenairewithoutclassification()
+    {
+        $userId = Auth::id();
+        $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)->whereNull('classification')->get();
+        return view('your-view-name', compact('rdvRecords'));
+    }
+
 
 }

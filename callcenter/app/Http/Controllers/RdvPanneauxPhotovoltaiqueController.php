@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RdvPanneauxPhotovoltaique;
+use App\Models\RdvPompeAChaleur;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -116,7 +117,18 @@ public function assignrdv(Request $request, $id)
         $rdv->delete();
         return redirect()->route('dashboard')->with('success', 'RDV deleted successfully');
     }
-
+    public function getRdvForPartenaireclassification()
+    {
+        $userId = Auth::id();
+        $rdvRecords = RdvPanneauxPhotovoltaique::where('partenaire_id', $userId)->whereNotNull('classification')->get();
+        return view('your-view-name', compact('rdvRecords'));
+    }
+    public function getRdvForPartenairewithoutclassification()
+    {
+        $userId = Auth::id();
+        $rdvRecords = RdvPanneauxPhotovoltaique::where('partenaire_id', $userId)->whereNull('classification')->get();
+        return view('your-view-name', compact('rdvRecords'));
+    }
 
 
 }
