@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\RdvThermostat;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\User;
 
 class RdvThermostatController extends Controller
 {
     public function index()
     {
+        $rdvRecords = RdvThermostat::orderBy('created_at', 'desc')->paginate(20);
+        $partenaires = User::where('role', 'partenaire')->get();
+
+        return view('superviseur.indexrdvthermostat', compact('rdvRecords', 'partenaires'));
         $rdvRecords = RdvThermostat::orderBy('created_at', 'desc')->paginate(20);
         $partenaires = User::where('role', 'partenaire')->get();
 
@@ -63,6 +68,7 @@ class RdvThermostatController extends Controller
 {
 
     $validatedData = $request->validate([
+        'Commentaire_partenaire' => 'required|string',
         'Commentaire_partenaire' => 'required|string',
         'classification' => 'required|string',
         'date_rappelle' => 'required|date',
