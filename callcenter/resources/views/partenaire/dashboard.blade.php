@@ -1,4 +1,4 @@
-@extends('agent.test')
+@extends('partenaire.test')
 
 @section('content')
     <div class="py-12">

@@ -189,302 +189,75 @@
 										<span class="menu-arrow"></span>
 									</span>
 									<!--end:Menu link-->
-									<!--begin:Menu sub-->
-									<div class="menu-sub menu-sub-accordion">
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link active" href="../dist/index.html">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Test</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-									</div>
-									<!--end:Menu sub-->
 								</div>
 								<!--end:Menu item-->
-								<!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-									<!--begin:Menu link-->
-									<span class="menu-link">
-										<span class="menu-icon">
-											<i class="ki-duotone ki-some-files fs-1">
-												<span class="path1"></span>
-												<span class="path2"></span>
-											</i>
-										</span>
-										<span class="menu-title">Pages</span>
-										<span class="menu-arrow"></span>
-									</span>
-									<!--end:Menu link-->
-									<!--begin:Menu sub-->
-									<div class="menu-sub menu-sub-accordion">
+
+								<!-- Rendez-vous Qualifiés -->
+								<div class="menu-item pt-5">
+									<div class="menu-content">
+										<span class="menu-heading fw-bold text-uppercase fs-7">Rendez-vous Qualifiés</span>
 									</div>
-									<!--end:Menu sub-->
+								</div>
+
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<a class="menu-link" href="#">
+
+										<span class="menu-title">Rdv Thermostat Qualifié</span>
+									</a>
 								</div>
 								<!--end:Menu item-->
+
 								<!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-									<!--begin:Menu link-->
-									<span class="menu-link">
-										<span class="menu-icon">
-											<i class="ki-duotone ki-chart-line-star fs-1">
-												<span class="path1"></span>
-												<span class="path2"></span>
-												<span class="path3"></span>
-											</i>
-										</span>
-										<span class="menu-title">Apps</span>
-										<span class="menu-arrow"></span>
-									</span>
-									<!--end:Menu link-->
-									<!--begin:Menu sub-->
-									<div class="menu-sub menu-sub-accordion">
+								<div class="menu-item">
+									<a class="menu-link" href="#">
 
-										<!--begin:Menu item-->
-										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-											<!--begin:Menu link-->
-											<span class="menu-link">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">User Management</span>
-												<span class="menu-arrow"></span>
-											</span>
-											<!--end:Menu link-->
-											<!--begin:Menu sub-->
-											<div class="menu-sub menu-sub-accordion">
-												<!--begin:Menu item-->
-												<div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
-													<!--begin:Menu link-->
-													<span class="menu-link">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Users</span>
-														<span class="menu-arrow"></span>
-													</span>
-													<!--end:Menu link-->
-													<!--begin:Menu sub-->
-													<div class="menu-sub menu-sub-accordion">
-														<!--begin:Menu item-->
-														<div class="menu-item">
-															<!--begin:Menu link-->
-															<a class="menu-link" href="../dist/apps/user-management/users/list.html">
-																<span class="menu-bullet">
-																	<span class="bullet bullet-dot"></span>
-																</span>
-																<span class="menu-title">Users List</span>
-															</a>
-															<!--end:Menu link-->
-														</div>
-														<!--end:Menu item-->
-														<!--begin:Menu item-->
-														<div class="menu-item">
-															<!--begin:Menu link-->
-															<a class="menu-link" href="#" data-kt-page="pro">
-																<span class="menu-bullet">
-																	<span class="bullet bullet-dot"></span>
-																</span>
-																<span class="menu-title">View User
-																<span class="badge badge-pro badge-light-danger fw-semibold fs-8 px-2 py-1 ms-1" data-bs-toggle="tooltip" title="Upgrade to Pro to get this">Pro</span></span>
-															</a>
-															<!--end:Menu link-->
-														</div>
-														<!--end:Menu item-->
-													</div>
-													<!--end:Menu sub-->
-												</div>
-												<!--end:Menu item-->
-												<!--begin:Menu item-->
-												<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-													<!--begin:Menu link-->
-													<span class="menu-link">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Roles</span>
-														<span class="menu-arrow"></span>
-													</span>
-													<!--end:Menu link-->
-													<!--begin:Menu sub-->
-													<div class="menu-sub menu-sub-accordion">
-														<!--begin:Menu item-->
-														<div class="menu-item">
-															<!--begin:Menu link-->
-															<a class="menu-link" href="#" data-kt-page="pro">
-																<span class="menu-bullet">
-																	<span class="bullet bullet-dot"></span>
-																</span>
-																<span class="menu-title">Roles List
-																<span class="badge badge-pro badge-light-danger fw-semibold fs-8 px-2 py-1 ms-1" data-bs-toggle="tooltip" title="Upgrade to Pro to get this">Pro</span></span>
-															</a>
-															<!--end:Menu link-->
-														</div>
-														<!--end:Menu item-->
-														<!--begin:Menu item-->
-														<div class="menu-item">
-															<!--begin:Menu link-->
-															<a class="menu-link" href="#" data-kt-page="pro">
-																<span class="menu-bullet">
-																	<span class="bullet bullet-dot"></span>
-																</span>
-																<span class="menu-title">View Role
-																<span class="badge badge-pro badge-light-danger fw-semibold fs-8 px-2 py-1 ms-1" data-bs-toggle="tooltip" title="Upgrade to Pro to get this">Pro</span></span>
-															</a>
-															<!--end:Menu link-->
-														</div>
-														<!--end:Menu item-->
-													</div>
-													<!--end:Menu sub-->
-												</div>
-												<!--end:Menu item-->
-												<!--begin:Menu item-->
-												<div class="menu-item">
-													<!--begin:Menu link-->
-													<a class="menu-link" href="#" data-kt-page="pro">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Permissions
-														<span class="badge badge-pro badge-light-danger fw-semibold fs-8 px-2 py-1 ms-1" data-bs-toggle="tooltip" title="Upgrade to Pro to get this">Pro</span></span>
-													</a>
-													<!--end:Menu link-->
-												</div>
-												<!--end:Menu item-->
-											</div>
-											<!--end:Menu sub-->
-										</div>
-										<!--end:Menu item-->
-										<!--begin:Menu item-->
-										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-											<!--begin:Menu link-->
-											<span class="menu-link">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Customers</span>
-												<span class="menu-arrow"></span>
-											</span>
-											<!--end:Menu link-->
-											<!--begin:Menu sub-->
-											<div class="menu-sub menu-sub-accordion">
-												<!--begin:Menu item-->
-												<div class="menu-item">
-													<!--begin:Menu link-->
-													<a class="menu-link" href="../dist/apps/customers/getting-started.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Getting Started</span>
-													</a>
-													<!--end:Menu link-->
-												</div>
-												<!--end:Menu item-->
-												<!--begin:Menu item-->
-												<div class="menu-item">
-													<!--begin:Menu link-->
-													<a class="menu-link" href="../dist/apps/customers/list.html">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Customer Listing</span>
-													</a>
-													<!--end:Menu link-->
-												</div>
-												<!--end:Menu item-->
-												<!--begin:Menu item-->
-												<div class="menu-item">
-													<!--begin:Menu link-->
-													<a class="menu-link" href="#" data-kt-page="pro">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Customer Details
-														<span class="badge badge-pro badge-light-danger fw-semibold fs-8 px-2 py-1 ms-1" data-bs-toggle="tooltip" title="Upgrade to Pro to get this">Pro</span></span>
-													</a>
-													<!--end:Menu link-->
-												</div>
-												<!--end:Menu item-->
-											</div>
-											<!--end:Menu sub-->
-										</div>
-										<!--end:Menu item-->
-
-
-										<!--begin:Menu item-->
-										<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-											<!--begin:Menu link-->
-											<span class="menu-link">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">File Manager</span>
-												<span class="menu-arrow"></span>
-											</span>
-											<!--end:Menu link-->
-											<!--begin:Menu sub-->
-											<div class="menu-sub menu-sub-accordion">
-
-												<!--begin:Menu item-->
-												<div class="menu-item">
-													<!--begin:Menu link-->
-													<a class="menu-link" href="#" data-kt-page="pro">
-														<span class="menu-bullet">
-															<span class="bullet bullet-dot"></span>
-														</span>
-														<span class="menu-title">Files
-														<span class="badge badge-pro badge-light-danger fw-semibold fs-8 px-2 py-1 ms-1" data-bs-toggle="tooltip" title="Upgrade to Pro to get this">Pro</span></span>
-													</a>
-													<!--end:Menu link-->
-												</div>
-												<!--end:Menu item-->
-
-
-											</div>
-											<!--end:Menu sub-->
-										</div>
-										<!--end:Menu item-->
-
-
-									</div>
-									<!--end:Menu sub-->
+										<span class="menu-title">Rdv Pompe à Chaleur Qualifié</span>
+									</a>
 								</div>
 								<!--end:Menu item-->
+
 								<!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-									<!--begin:Menu link-->
-									<span class="menu-link">
-										<span class="menu-icon">
-											<i class="ki-duotone ki-rescue fs-1">
-												<span class="path1"></span>
-												<span class="path2"></span>
-											</i>
-										</span>
-										<span class="menu-title">Help</span>
-										<span class="menu-arrow"></span>
-									</span>
-									<!--end:Menu link-->
-									<!--begin:Menu sub-->
-									<div class="menu-sub menu-sub-accordion">
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link" href="https://preview.keenthemes.com/html/saul-html-pro/docs/base/utilities" target="_blank" title="Check out over 200 in-house components" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Components</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
+								<div class="menu-item">
+									<a class="menu-link" href="#">
+
+										<span class="menu-title">Rdv Panneaux Photovoltaïques Qualifié</span>
+									</a>
+								</div>
+								<!--end:Menu item-->
+
+								<!-- Rendez-vous Non Qualifiés -->
+								<div class="menu-item pt-5">
+									<div class="menu-content">
+										<span class="menu-heading fw-bold text-uppercase fs-7">Rendez-vous Non Qualifiés</span>
 									</div>
-									<!--end:Menu sub-->
+								</div>
+
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<a class="menu-link" href="{{ route('rdv.Thermostatpartenaire') }}">
+
+										</span>
+										<span class="menu-title">Rdv Thermostat Non Qualifié</span>
+									</a>
+								</div>
+								<!--end:Menu item-->
+
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<a class="menu-link" href="{{ route('rdv.PompeAChaleurpartenaire') }}">
+
+										<span class="menu-title">Rdv Pompe à Chaleur Non Qualifié</span>
+									</a>
+								</div>
+								<!--end:Menu item-->
+
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<a class="menu-link" href="{{ route('rdv.PanneauxPhotovoltaiquepartenaire') }}">
+
+										<span class="menu-title">Rdv Panneaux Photovoltaïques Non Qualifié</span>
+									</a>
 								</div>
 								<!--end:Menu item-->
 							</div>

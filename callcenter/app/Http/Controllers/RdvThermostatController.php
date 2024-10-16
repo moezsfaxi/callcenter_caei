@@ -6,13 +6,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RdvThermostat;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class RdvThermostatController extends Controller
 {
     public function index()
     {
-        $rdvRecords = RdvThermostat::all();
-        return view('agent.indexthermostat', compact('rdvRecords'));
+        $rdvRecords = RdvThermostat::orderBy('created_at', 'desc')->paginate(20);
+        $partenaires = User::where('role', 'partenaire')->get();
+
+        return view('superviseur.indexrdvthermostat', compact('rdvRecords', 'partenaires'));
     }
     public function create()
     {
@@ -60,7 +63,7 @@ class RdvThermostatController extends Controller
 {
 
     $validatedData = $request->validate([
-        'Commentaire_partenaire' => 'nullable|string',
+        'Commentaire_partenaire' => 'required|string',
         'classification' => 'required|string',
         'date_rappelle' => 'required|date',
     ]);
@@ -83,11 +86,15 @@ public function getRdvByAgent()
     return view('agent.indexthermostat', compact('rdvRecords'));
 }
 public function getRdvForPartenaire()
-    {
-        $userId = Auth::id();
-        $rdvRecords = RdvThermostat::where('partenaire_id', $userId)->get();
-        return view('your-view-name', compact('rdvRecords'));
-    }
+{
+    $userId = Auth::id(); // Récupère l'ID de l'utilisateur connecté
+    // Récupère les RDV non qualifiés pour le partenaire
+    $rdvRecords = RdvThermostat::where('partenaire_id', $userId)
+        ->whereNull('classification') // Filtre pour les RDV non qualifiés
+        ->get();
+
+    return view('partenaire.indexthermostat', compact('rdvRecords')); // Renvoie la vue avec les RDV non qualifiés
+}
     public function destroy($id)
     {
 
@@ -95,7 +102,17 @@ public function getRdvForPartenaire()
         $rdv->delete();
         return redirect()->route('dashboard')->with('success', 'RDV deleted successfully');
     }
+    public function assignrdv(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'partenaire_id' => 'required|numeric',
+        ]);
 
+        $rdv = RdvThermostat::findOrFail($id);
+        $rdv->update($validatedData);
+
+        return redirect()->route('superviseur-rdv-thermostat.index')->with('success', 'RDV updated successfully');
+    }
 
 
 }

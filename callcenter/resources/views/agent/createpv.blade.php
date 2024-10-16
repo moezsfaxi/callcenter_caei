@@ -4,7 +4,7 @@
 
 <div class="container">
     <h1 class="mb-4">Créer un nouveau rendez-vous Panneaux</h1>
-    <form action="{{ route('rdv-thermostat.store') }}" method="POST">
+    <form action="{{ route('rdv-panneaux-photovoltaique.store') }}" method="POST">
         @csrf
 
         @if ($errors->any())
