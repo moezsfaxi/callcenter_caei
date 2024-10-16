@@ -39,10 +39,12 @@ Route::middleware(['auth','partenaire'])->group(function(){
     Route::put('/partenaire-rdv-panneaux-photovoltaique/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'update'])->name('rdv-panneaux-photovoltaique.update');
     Route::put('/partenaire-rdv-pompe-a-chaleur/{id}', [RdvPompeAChaleurController::class, 'update'])->name('rdv-pompe-a-chaleur.update');
     Route::put('/partenaire-rdv-thermostat/{id}', [RdvThermostatController::class, 'update'])->name('rdv-thermostat.update');
-    Route::get('/rdv-thermostat/partenaire', [RdvThermostatController::class, 'getRdvForPartenaire'])->name('rdv.Thermostatpartenaire');
-    Route::get('/rdv-pompe-a-chaleur/partenaire', [RdvPompeAChaleurController::class, 'getRdvForPartenaire'])->name('rdv.PompeAChaleurpartenaire');
-    Route::get('/rdv-panneaux-photovoltaique/partenaire', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvForPartenaire'])->name('rdv.PanneauxPhotovoltaiquepartenaire');
-
+    Route::get('/rdv-thermostat-classification/partenaire', [RdvThermostatController::class, 'getRdvForPartenaireclassification'])->name('rdv.Thermostatpartenaire-classification');
+    Route::get('/rdv-pompe-a-chaleur-classification/partenaire', [RdvPompeAChaleurController::class, 'getRdvForPartenaireclassification'])->name('rdv.PompeAChaleurpartenaire-classification');
+    Route::get('/rdv-panneaux-photovoltaique-classification/partenaire', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvForPartenaireclassification'])->name('rdv.PanneauxPhotovoltaiquepartenaire-classification');
+    Route::get('/rdv-thermostat-withoutclassification/partenaire', [RdvThermostatController::class, 'getRdvForPartenairewithoutclassification'])->name('rdv.Thermostatpartenaire-withoutclassification');
+    Route::get('/rdv-pompe-a-chaleur-withoutclassification/partenaire', [RdvPompeAChaleurController::class, 'getRdvForPartenairewithoutclassification'])->name('rdv.PompeAChaleurpartenaire-withoutclassification');
+    Route::get('/rdv-panneaux-photovoltaique-withoutclassification/partenaire', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvForPartenairewithoutclassification'])->name('rdv.PanneauxPhotovoltaiquepartenaire-withoutclassification');
 
 });
 

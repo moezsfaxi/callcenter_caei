@@ -40,6 +40,4 @@ class RdvPanneauxPhotovoltaique extends Model
     }
 
 
-
-
 }
