@@ -100,22 +100,7 @@ public function getRdvByAgent()
         $rdv->delete();
         return redirect()->route('dashboard')->with('success', 'RDV deleted successfully');
     }
-    public function assignrdv(Request $request, $id)
-{
 
-    $validatedData = $request->validate([
-        'partenaire_id' => 'nullable| numeric',
-
-    ]);
-
-
-    $rdv = RdvPompeAChaleur::findOrFail($id);
-
-
-    $rdv->update($validatedData);
-
-    return redirect()->route('dashboard')->with('success', 'RDV updated successfully');
-}
 
 public function getRdvForPartenaireclassification()
     {
