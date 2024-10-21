@@ -91,7 +91,7 @@
 											<div class="d-flex flex-column text-center">
 												<div class="fw-bold d-flex align-items-center justify-content-center fs-5">
 													{{ Auth::user()->name }}
-													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Partenaire</span>
 												</div>
 												<a href="#" class="fw-semibold text-muted text-hover-primary fs-7 mb-2" style="word-break: break-all;">{{ Auth::user()->email }}</a>
 											</div>
@@ -107,7 +107,7 @@
 										<a href="{{ route('profile.edit') }}" class="menu-link px-5">{{ __('Profile') }}</a>
 									</div>
 									<!--end::Menu item-->
-                                    
+
 									<!--begin::Menu item-->
 									<div class="menu-item px-5">
 										<form method="POST" action="{{ route('logout') }}">

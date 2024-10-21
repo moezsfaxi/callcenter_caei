@@ -80,7 +80,6 @@
                                         @case('Pas intéressé') table-secondary @break
                                         @case('RDV annulé') table-danger @break
                                         @case('RDV à rappeler') table-warning @break
-                                        @default table-light
                                     @endswitch
                                 ">
                                     <td >{{ $rdv->nom_du_prospect }}</td>

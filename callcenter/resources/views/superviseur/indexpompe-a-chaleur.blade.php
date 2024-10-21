@@ -83,7 +83,7 @@
                                             <form id="assignForm{{ $rdv->id }}" action="{{ route('rdv-pompe-a-chaleur.assignrdv', $rdv->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <select class="form-select form-select-sm" name="partenaire_id" id="partenaireSelect{{ $rdv->id }}" onchange="confirmAssign({{ $rdv->id }}, this.value)">
+                                                <select class="form-select form-select-sm" name="partenaire_id" id="partenaireSelect{{ $rdv->id }}" onchange="confirmAssign({{ $rdv->id }}, this.value, this.options[this.selectedIndex].text )">
                                                     <option value="">Sélectionner un partenaire</option>
                                                     @foreach($partenaires as $partenaire)
                                                         <option value="{{ $partenaire->id }}">{{ $partenaire->name }}</option>
@@ -254,10 +254,10 @@
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-function confirmAssign(rdvId, partenaireId) {
+function confirmAssign(rdvId, partenaireId, partenaireNom) {
     if (partenaireId) {
         Swal.fire({
-            title: "Êtes-vous sûr de vouloir affecter ce partenaire ?",
+            title: "Êtes-vous sûr de vouloir affecter ce rendez-vous à " + partenaireNom + " ?",
             showCancelButton: true,
             confirmButtonText: "Oui, affecter",
             cancelButtonText: "Non, annuler",
