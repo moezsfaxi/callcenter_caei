@@ -106,6 +106,8 @@
                             </tbody>
                         </table>
                         <!--end::Table-->
+                        {{ $rdvRecords->links() }}
+
                     </div>
                     <!--end::Card body-->
                 </div>

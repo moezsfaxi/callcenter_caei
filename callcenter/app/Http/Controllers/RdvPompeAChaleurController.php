@@ -89,7 +89,7 @@ public function getRdvByAgent()
             $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)
             ->whereNull('classification') // Filtre pour les RDV non qualifiés
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(20); // Ajoute la pagination, 20 éléments par page
         return view('partenaire.indexpompeachaleur', compact('rdvRecords'));
     }
     public function assignrdv(Request $request, $id)
@@ -117,7 +117,7 @@ public function getRdvByAgent()
         $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)
                     ->whereNotNull('classification')  // Pour les RDV qualifiés
                     ->orderBy('created_at', 'desc')
-                    ->get();
+                    ->paginate(20); // Ajoute la pagination, 20 éléments par page
 
         return view('partenaire.rdvqualifierpompe', compact('rdvRecords'));
     }
