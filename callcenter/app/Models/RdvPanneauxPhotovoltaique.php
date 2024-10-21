@@ -10,7 +10,7 @@ class RdvPanneauxPhotovoltaique extends Model
     use HasFactory;
 
 
-  
+
     protected $fillable = [
         'agent_id',
         'partenaire_id',
@@ -27,8 +27,8 @@ class RdvPanneauxPhotovoltaique extends Model
         'classification',
         'date_classification',
         'date_rappelle',
-    ];   
-      
+    ];
+
     public function agent()
     {
         return $this->belongsTo(User::class, 'agent_id');

@@ -107,6 +107,7 @@
 										<a href="{{ route('profile.edit') }}" class="menu-link px-5">{{ __('Profile') }}</a>
 									</div>
 									<!--end::Menu item-->
+                                    
 									<!--begin::Menu item-->
 									<div class="menu-item px-5">
 										<form method="POST" action="{{ route('logout') }}">
@@ -126,7 +127,6 @@
 							<!--begin::Action-->
 							<div class="app-navbar-item ms-3 ms-lg-4 me-lg-6">
 								<!--begin::Link-->
-								<a href="../dist/authentication/sign-in/basic.html" class="btn btn-icon btn-custom btn-color-gray-600 btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
 									<i class="ki-duotone ki-setting-3 fs-1">
 										<span class="path1"></span>
 										<span class="path2"></span>
@@ -134,7 +134,6 @@
 										<span class="path4"></span>
 										<span class="path5"></span>
 									</i>
-								</a>
 								<!--end::Link-->
 							</div>
 							<!--end::Action-->
@@ -174,90 +173,132 @@
 							<!--begin::Sidebar menu-->
 							<div id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false" class="flex-column-fluid menu menu-sub-indention menu-column menu-rounded menu-active-bg mb-7">
 								<!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<!--begin:Menu link-->
 									<span class="menu-link">
-										<span class="menu-icon">
-											<i class="ki-duotone ki-element-11 fs-1">
-												<span class="path1"></span>
-												<span class="path2"></span>
-												<span class="path3"></span>
-												<span class="path4"></span>
-											</i>
+										<span class="menu-bullet">
+											<span class="bullet bullet-dot"></span>
 										</span>
-										<span class="menu-title">Dashboards</span>
+										<span class="menu-title">Rdv Thermostat</span>
 										<span class="menu-arrow"></span>
 									</span>
 									<!--end:Menu link-->
-								</div>
-								<!--end:Menu item-->
-
-								<!-- Rendez-vous Qualifiés -->
-								<div class="menu-item pt-5">
-									<div class="menu-content">
-										<span class="menu-heading fw-bold text-uppercase fs-7">Rendez-vous Qualifiés</span>
+									<!--begin:Menu sub-->
+									<div class="menu-sub menu-sub-accordion">
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="{{ route('rdv.thermostat.qualifies') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rdv Qualifiés</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="{{ route('rdv.Thermostatpartenaire') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rdv Non Qualifiés</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
 									</div>
-								</div>
-
-								<!--begin:Menu item-->
-								<div class="menu-item">
-									<a class="menu-link" href="#">
-
-										<span class="menu-title">Rdv Thermostat Qualifié</span>
-									</a>
+									<!--end:Menu sub-->
 								</div>
 								<!--end:Menu item-->
 
+
+
+								<!-- Rdv Panneaux Photovoltaïques -->
 								<!--begin:Menu item-->
-								<div class="menu-item">
-									<a class="menu-link" href="#">
-
-										<span class="menu-title">Rdv Pompe à Chaleur Qualifié</span>
-									</a>
-								</div>
-								<!--end:Menu item-->
-
-								<!--begin:Menu item-->
-								<div class="menu-item">
-									<a class="menu-link" href="#">
-
-										<span class="menu-title">Rdv Panneaux Photovoltaïques Qualifié</span>
-									</a>
-								</div>
-								<!--end:Menu item-->
-
-								<!-- Rendez-vous Non Qualifiés -->
-								<div class="menu-item pt-5">
-									<div class="menu-content">
-										<span class="menu-heading fw-bold text-uppercase fs-7">Rendez-vous Non Qualifiés</span>
-									</div>
-								</div>
-
-								<!--begin:Menu item-->
-								<div class="menu-item">
-									<a class="menu-link" href="{{ route('rdv.Thermostatpartenaire') }}">
-
+								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+									<!--begin:Menu link-->
+									<span class="menu-link">
+										<span class="menu-bullet">
+											<span class="bullet bullet-dot"></span>
 										</span>
-										<span class="menu-title">Rdv Thermostat Non Qualifié</span>
-									</a>
+										<span class="menu-title">Rdv PV</span>
+										<span class="menu-arrow"></span>
+									</span>
+									<!--end:Menu link-->
+									<!--begin:Menu sub-->
+									<div class="menu-sub menu-sub-accordion">
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="{{ route('rdv.QPanneauxPhotovoltaiquepartenaire') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rdv Qualifiés</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="{{ route('rdv.PanneauxPhotovoltaiquepartenaire') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rdv Non Qualifiés</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+									</div>
+									<!--end:Menu sub-->
 								</div>
 								<!--end:Menu item-->
 
+								<!-- Rdv Pompe à Chaleur -->
 								<!--begin:Menu item-->
-								<div class="menu-item">
-									<a class="menu-link" href="{{ route('rdv.PompeAChaleurpartenaire') }}">
-
-										<span class="menu-title">Rdv Pompe à Chaleur Non Qualifié</span>
-									</a>
-								</div>
-								<!--end:Menu item-->
-
-								<!--begin:Menu item-->
-								<div class="menu-item">
-									<a class="menu-link" href="{{ route('rdv.PanneauxPhotovoltaiquepartenaire') }}">
-
-										<span class="menu-title">Rdv Panneaux Photovoltaïques Non Qualifié</span>
-									</a>
+								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+									<!--begin:Menu link-->
+									<span class="menu-link">
+										<span class="menu-bullet">
+											<span class="bullet bullet-dot"></span>
+										</span>
+										<span class="menu-title">Rdv Pompe à Chaleur</span>
+										<span class="menu-arrow"></span>
+									</span>
+									<!--end:Menu link-->
+									<!--begin:Menu sub-->
+									<div class="menu-sub menu-sub-accordion">
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="{{ route('rdv.pompeachaleur.qualifies') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rdv Qualifiés</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="{{ route('rdv.PompeAChaleurpartenaire') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rdv Non Qualifiés</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+									</div>
+									<!--end:Menu sub-->
 								</div>
 								<!--end:Menu item-->
 							</div>

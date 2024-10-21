@@ -52,7 +52,7 @@ class RdvPompeAChaleurController extends Controller
           $rdv = RdvPompeAChaleur::create($validatedData);
     return redirect()->route('rdv.PompeAChaleurAgent')->with('success', 'RDV created successfully');
 }
-public function update(Request $request, $id)
+    public function update(Request $request, $id)
 {
     $validatedData = $request->validate([
         'Commentaire_partenaire' => 'nullable|string',
@@ -61,7 +61,8 @@ public function update(Request $request, $id)
     ]);
     $rdv = RdvPompeAChaleur::findOrFail($id);
     $rdv->update($validatedData);
-    return redirect()->route('dashboard')->with('success', 'RDV updated successfully');
+    return redirect()->back()->with('success', 'Le rendez-vous a été mis à jour avec succès.');
+
 }
 
 public function getRdvByAgent()
@@ -70,12 +71,26 @@ public function getRdvByAgent()
         $rdvRecords = RdvPompeAChaleur::where('agent_id', $userId)->get();
         return view('agent.indexpac', compact('rdvRecords'));
     }
+    public function getRdvForPartenaireQualifier()
+{
+    $userId = Auth::id(); // Récupère l'ID de l'utilisateur connecté
+    // Récupère les RDV qualifiés pour le partenaire
+    $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)
+        ->whereNotNull('classification') // Filtre pour les RDV qualifiés
+        ->get();
+
+    return view('partenaire.rdvqualifierpompe', compact('rdvRecords')); // Renvoie la vue avec les RDV qualifiés
+}
 
     public function getRdvForPartenaire()
     {
         $userId = Auth::id();
-        $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)->get();
-        return view('your-view-name', compact('rdvRecords'));
+         // Récupère les RDV non qualifiés pour le partenaire
+            $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)
+            ->whereNull('classification') // Filtre pour les RDV non qualifiés
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('partenaire.indexpompeachaleur', compact('rdvRecords'));
     }
     public function assignrdv(Request $request, $id)
     {
@@ -84,23 +99,68 @@ public function getRdvByAgent()
             'partenaire_id' => 'required| numeric',
 
         ]);
-
-
         $rdv = RdvPompeAChaleur::findOrFail($id);
-
-
         $rdv->update($validatedData);
-
         return redirect()->route('superviseur-rdv-pompe-a-chaleur.index')->with('success', 'RDV updated successfully');
     }
     public function destroy($id)
     {
-
         $rdv = RdvPompeAChaleur::findOrFail($id);
         $rdv->delete();
+
         return redirect()->route('dashboard')->with('success', 'RDV deleted successfully');
     }
 
+    public function getRdvQualifiesForPartenaire()
+    {
+        $userId = Auth::id();
+        $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)
+                    ->whereNotNull('classification')  // Pour les RDV qualifiés
+                    ->orderBy('created_at', 'desc')
+                    ->get();
 
+        return view('partenaire.rdvqualifierpompe', compact('rdvRecords'));
+    }
 
+    public function updatequalification(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'classification' => 'required|string',
+            'Commentaire_partenaire' => 'nullable|string',
+            'date_rappelle' => 'nullable|date',
+        ]);
+
+        $rdv = RdvPompeAChaleur::findOrFail($id);
+        $rdv->update($validatedData);
+
+        return redirect()->back()->with('success', 'Le rendez-vous a été mis à jour avec succès.');
+    }
+
+    public function updateRdvPompeAChaleur(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'nom_du_prospect' => 'nullable|string|max:255',
+            'prenom_du_prospect' => 'nullable|string|max:255',
+            'telephone' => 'nullable|string|max:20',
+            'adresse' => 'nullable|string|max:255',
+            'code_postal' => 'nullable|string|max:10',
+            'ville' => 'nullable|string|max:255',
+            'date_du_rdv' => 'nullable|date',
+            'statut_de_residence' => 'nullable|string|max:255',
+            'Commentaire_agent' => 'nullable|string',
+        ]);
+
+        $rdv = RdvPompeAChaleur::findOrFail($id);
+
+        // Update only the fields that are present in the request
+        foreach ($validatedData as $key => $value) {
+            if (!is_null($value)) {
+                $rdv->$key = $value;
+            }
+        }
+
+        $rdv->save();
+
+        return redirect()->back()->with('success', 'Rendez-vous pompe à chaleur mis à jour avec succès');
+    }
 }

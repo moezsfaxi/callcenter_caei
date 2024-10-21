@@ -42,8 +42,12 @@ Route::middleware(['auth','partenaire'])->group(function(){
     Route::get('/rdv-thermostat/partenaire', [RdvThermostatController::class, 'getRdvForPartenaire'])->name('rdv.Thermostatpartenaire');
     Route::get('/rdv-pompe-a-chaleur/partenaire', [RdvPompeAChaleurController::class, 'getRdvForPartenaire'])->name('rdv.PompeAChaleurpartenaire');
     Route::get('/rdv-panneaux-photovoltaique/partenaire', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvForPartenaire'])->name('rdv.PanneauxPhotovoltaiquepartenaire');
-
-
+    Route::get('/rdv-panneaux-photovoltaique/partenaire/Qualifie', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvForPartenaireQualified'])->name('rdv.QPanneauxPhotovoltaiquepartenaire');
+    Route::get('/partenaire/rdv-pompe-a-chaleur/qualifies', [RdvPompeAChaleurController::class, 'getRdvQualifiesForPartenaire'])->name('rdv.pompeachaleur.qualifies');
+    Route::get('/partenaire/rdv-thermostat/qualifies', [RdvThermostatController::class, 'getRdvForPartenaireQualifier'])->name('rdv.thermostat.qualifies');
+    Route::put('/rdv-thermostat/{id}/updatequalification', [RdvThermostatController::class, 'updatequalification'])->name('rdv-thermostat.updatequalification');
+    Route::put('/rdv-panneaux-photovoltaique/{id}/updatequalification', [RdvPanneauxPhotovoltaiqueController::class, 'updatequalification'])->name('rdv-pv.updatequalification');
+    Route::put('/rdv-pompe-a-chaleur/{id}/updatequalification', [RdvPompeAChaleurController::class, 'updatequalification'])->name('rdv-pompe.updatequalification');
 });
 
 Route::middleware(['auth','superviseur'])->group(function(){
@@ -57,6 +61,9 @@ Route::middleware(['auth','superviseur'])->group(function(){
     Route::get('/all-superviseur-rdv-pompe-a-chaleur', [RdvPompeAChaleurController::class, 'index'])->name('superviseur-rdv-pompe-a-chaleur.index');
     Route::get('/all-superviseur-rdv-panneaux-photovoltaique', [RdvPanneauxPhotovoltaiqueController::class, 'index'])->name('superviseur-rdv-panneaux-photovoltaique.index');
     Route::get('/all-superviseur-rdv-thermostat', [RdvThermostatController::class, 'index'])->name('superviseur-rdv-thermostat.index');
+    Route::put('/rdv-thermostat/{id}', [RdvThermostatController::class, 'updaterdvThermostat'])->name('rdv.thermostat.update');
+    Route::put('/rdv-pompe-a-chaleur/{id}', [RdvPompeAChaleurController::class, 'updateRdvPompeAChaleur'])->name('rdv.pompe-a-chaleur.update');
+    Route::put('/rdv-panneaux/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'updateRdvPanneau'])->name('rdv.panneaux.update');
 
 });
 
@@ -73,4 +80,7 @@ Route::middleware(['auth','admin'])->group(function(){
 
 
 
+
 require __DIR__.'/auth.php';
+
+

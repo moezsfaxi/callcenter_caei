@@ -52,11 +52,7 @@ class RdvPanneauxPhotovoltaiqueController extends Controller
              ->withErrors(['telephone' => 'Ce numéro de téléphone a déjà été utilisé pour un autre rendez-vous.']);
      }
     $validatedData['agent_id'] = Auth::id();
-
-
     $rdv = RdvPanneauxPhotovoltaique::create($validatedData);
-
-
     return redirect()->route('rdv.PanneauxPhotovoltaiqueAgent')->with('success', 'RDV created successfully');
 }
 
@@ -68,14 +64,9 @@ public function update(Request $request, $id)
         'classification' => 'required|string',
         'date_rappelle' => 'required|date',
     ]);
-
-
     $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
-
-
     $rdv->update($validatedData);
-
-    return redirect()->route('dashboard')->with('success', 'RDV updated successfully');
+    return redirect()->route('rdv.PanneauxPhotovoltaiquepartenaire')->with('success', 'RDV updated successfully');
 }
 
 public function assignrdv(Request $request, $id)
@@ -85,13 +76,8 @@ public function assignrdv(Request $request, $id)
         'partenaire_id' => 'required| numeric',
 
     ]);
-
-
     $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
-
-
     $rdv->update($validatedData);
-
     return redirect()->route('superviseur-rdv-panneaux-photovoltaique.index')->with('success', 'RDV updated successfully');
 }
 
@@ -103,20 +89,78 @@ public function assignrdv(Request $request, $id)
         return view('agent.indexpv', compact('rdvRecords'));
     }
 
+
     public function getRdvForPartenaire()
     {
         $userId = Auth::id();
-        $rdvRecords = RdvPanneauxPhotovoltaique::where('partenaire_id', $userId)->get();
-        return view('your-view-name', compact('rdvRecords'));
+         // Récupère les RDV non qualifiés pour le partenaire
+        $rdvRecords = RdvPanneauxPhotovoltaique::where('partenaire_id', $userId)
+         ->whereNull('classification') // Filtre pour les RDV non qualifiés
+         ->orderBy('created_at', 'desc')
+         ->get();
+        return view('partenaire.indexpanneau', compact('rdvRecords'));
     }
+    public function getRdvForPartenaireQualified()
+{
+    $userId = Auth::id();
+    $rdvRecords = RdvPanneauxPhotovoltaique::where('partenaire_id', $userId)
+                    ->whereNotNull('classification')  // Pour les RDV qualifiés
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+    return view('partenaire.rdvqualifierpv', compact('rdvRecords'));
+}
+
     public function destroy($id)
     {
-
         $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
         $rdv->delete();
         return redirect()->route('dashboard')->with('success', 'RDV deleted successfully');
     }
 
+    public function updatequalification(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'classification' => 'required|string',
+            'Commentaire_partenaire' => 'nullable|string',
+            'date_rappelle' => 'nullable|date',
+        ]);
 
+        $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
 
+        $rdv->classification = $validatedData['classification'];
+        $rdv->Commentaire_partenaire = $validatedData['Commentaire_partenaire'];
+        $rdv->date_rappelle = $validatedData['date_rappelle'];
+
+        $rdv->save();
+
+        return redirect()->route('rdv.QPanneauxPhotovoltaiquepartenaire')->with('success', 'Rendez-vous mis à jour avec succès');
+    }
+    public function updateRdvPanneau(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'nom_du_prospect' => 'nullable|string|max:255',
+            'prenom_du_prospect' => 'nullable|string|max:255',
+            'telephone' => 'nullable|string|max:20',
+            'adresse' => 'nullable|string|max:255',
+            'code_postal' => 'nullable|string|max:10',
+            'ville' => 'nullable|string|max:255',
+            'date_du_rdv' => 'nullable|date',
+            'statut_de_residence' => 'nullable|string|max:255',
+            'Commentaire_agent' => 'nullable|string',
+        ]);
+
+        $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
+
+        // Update only the fields that are present in the request
+        foreach ($validatedData as $key => $value) {
+            if (!is_null($value)) {
+                $rdv->$key = $value;
+            }
+        }
+
+        $rdv->save();
+
+        return redirect()->back()->with('success', 'Rendez-vous pompe à chaleur mis à jour avec succès');
+    }
 }

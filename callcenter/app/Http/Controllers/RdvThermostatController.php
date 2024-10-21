@@ -54,8 +54,7 @@ class RdvThermostatController extends Controller
         $rdv = RdvThermostat::create($validatedData);
 
         // Redirection avec un message de succès
-        return redirect()->route('agent.indexthermostat')
-            ->with('success', 'Rendez-vous créé avec succès pour ' . $rdv->nom_du_prospect . ' ' . $rdv->prenom_du_prospect);
+        return redirect()->route('rdv.ThermostatAgent') ->with('success', 'Rendez-vous créé avec succès pour ' . $rdv->nom_du_prospect . ' ' . $rdv->prenom_du_prospect);
     }
 
 
@@ -65,17 +64,63 @@ class RdvThermostatController extends Controller
     $validatedData = $request->validate([
         'Commentaire_partenaire' => 'required|string',
         'classification' => 'required|string',
-        'date_rappelle' => 'required|date',
+        'date_rappelle' => 'date',
     ]);
-
 
     $rdv = RdvThermostat::findOrFail($id);
 
-
     $rdv->update($validatedData);
 
+    return redirect()->route('rdv.Thermostatpartenaire')->with('success', 'RDV updated successfully');
+}
+public function updaterdvThermostat(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'nom_du_prospect' => 'nullable|string|max:255',
+        'prenom_du_prospect' => 'nullable|string|max:255',
+        'telephone' => 'nullable|string|max:20',
+        'adresse' => 'nullable|string|max:255',
+        'code_postal' => 'nullable|string|max:10',
+        'ville' => 'nullable|string|max:255',
+        'date_du_rdv' => 'nullable|date',
+        'statut_de_residence' => 'nullable|string|max:255',
+        'Commentaire_agent' => 'nullable|string',
+    ]);
 
-    return redirect()->route('dashboard')->with('success', 'RDV updated successfully');
+    $rdv = RdvThermostat::findOrFail($id);
+
+    // Update only the fields that are present in the request
+    foreach ($validatedData as $key => $value) {
+        if (!is_null($value)) {
+            $rdv->$key = $value;
+        }
+    }
+
+    $rdv->save();
+
+    return redirect()->back()->with('success', 'Rendez-vous mis à jour avec succès');
+}
+
+public function updatequalification(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'Commentaire_partenaire' => 'nullable|string',
+        'classification' => 'required|string',
+        'date_rappelle' => 'nullable|date',
+    ]);
+
+    $rdv = RdvThermostat::findOrFail($id);
+
+    // Récupérer les anciennes valeurs si elles ne sont pas fournies
+    if (empty($validatedData['Commentaire_partenaire'])) {
+        $validatedData['Commentaire_partenaire'] = $rdv->Commentaire_partenaire;
+    }
+    if (empty($validatedData['date_rappelle'])) {
+        $validatedData['date_rappelle'] = $rdv->date_rappelle;
+    }
+
+    $rdv->update($validatedData);
+    return redirect()->route('rdv.thermostat.qualifies')->with('success', 'Qualification mise à jour avec succès');
 }
 
 public function getRdvByAgent()
@@ -85,15 +130,28 @@ public function getRdvByAgent()
     $rdvRecords = RdvThermostat::where('agent_id', $userId)->get();
     return view('agent.indexthermostat', compact('rdvRecords'));
 }
+public function getRdvForPartenaireQualifier()
+{
+    $userId = Auth::id(); // Récupère l'ID de l'utilisateur connecté
+
+    // Récupère les RDV qualifiés pour le partenaire
+    $rdvRecords = RdvThermostat::where('partenaire_id', $userId)
+        ->whereNotNull('classification') // Filtre pour les RDV qualifiés
+        ->get();
+
+    return view('partenaire.rdvqualifierthermostat', compact('rdvRecords')); // Renvoie la vue avec les RDV qualifiés
+}
+
 public function getRdvForPartenaire()
 {
     $userId = Auth::id(); // Récupère l'ID de l'utilisateur connecté
-    // Récupère les RDV non qualifiés pour le partenaire
+    // Récupère les RDV non qualifiés pour le partenaire avec pagination
     $rdvRecords = RdvThermostat::where('partenaire_id', $userId)
         ->whereNull('classification') // Filtre pour les RDV non qualifiés
-        ->get();
+        ->orderBy('created_at', 'desc')
+        ->paginate(20); // Ajoute la pagination, 20 éléments par page
 
-    return view('partenaire.indexthermostat', compact('rdvRecords')); // Renvoie la vue avec les RDV non qualifiés
+    return view('partenaire.indexthermostat', compact('rdvRecords'));
 }
     public function destroy($id)
     {

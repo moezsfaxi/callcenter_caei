@@ -80,7 +80,6 @@
                             <option value="">Choisir...</option>
                             <option value="Propriétaire">Propriétaire</option>
                             <option value="Locataire">Locataire</option>
-                            <option value="Autre">Autre</option>
                         </select>
                     </div>
                     <div class="col-12">

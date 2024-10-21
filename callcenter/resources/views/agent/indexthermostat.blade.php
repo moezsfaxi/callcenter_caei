@@ -88,14 +88,12 @@
                                         <!--begin::Menu-->
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_view_details">Voir détails</a>
+                                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_view_details_{{ $rdv->id }}">Voir détails</a>
                                             </div>
                                             <div class="menu-item px-3">
                                                 <a href="#" class="menu-link px-3">Modifier</a>
                                             </div>
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Supprimer</a>
-                                            </div>
+
                                         </div>
                                         <!--end::Menu-->
                                     </td>
@@ -116,26 +114,122 @@
     <!--end::Content wrapper-->
 </div>
 <!--end::Main-->
-
-<!-- Modal pour afficher les détails (y compris le commentaire) -->
-<div class="modal fade" id="kt_modal_view_details" tabindex="-1" aria-hidden="true">
+<!-- Modals pour afficher les détails de chaque rendez-vous -->
+@foreach($rdvRecords as $rdv)
+<div class="modal fade" id="kt_modal_view_details_{{ $rdv->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="fw-bolder">Détails du rendez-vous</h2>
+                <h2 class="fw-bolder">Détails du rendez-vous thermostat</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <!-- Contenu des détails du rendez-vous, y compris le commentaire -->
-                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                    <!-- Ajoutez ici les détails du rendez-vous, y compris le champ Commentaire_agent -->
+                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_details_scroll_{{ $rdv->id }}" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_details_header_{{ $rdv->id }}" data-kt-scroll-wrappers="#kt_modal_details_scroll_{{ $rdv->id }}" data-kt-scroll-offset="300px">
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Nom:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->nom_du_prospect }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Prénom:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->prenom_du_prospect }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Téléphone:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->telephone }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Adresse:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->adresse }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Code Postal:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->code_postal }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Ville:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->ville }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Date du RDV:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->date_du_rdv }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Statut de résidence:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->statut_de_residence }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Commentaire agent:</label>
+                        <textarea class="form-control form-control-solid mb-3 mb-lg-0" rows="3" readonly>{{ $rdv->Commentaire_agent }}</textarea>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+{{-- <div class="modal fade" id="kt_modal_edit_rdv_{{ $rdv->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="fw-bolder">Modifier le rendez-vous thermostat</h2>
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                </div>
+            </div>
+            <form id="editForm{{ $rdv->id }}" action="{{ route('rdv.thermostat.update', $rdv->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_edit_rdv_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_edit_rdv_header" data-kt-scroll-wrappers="#kt_modal_edit_rdv_scroll" data-kt-scroll-offset="300px">
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Nom</label>
+                            <input type="text" name="nom_du_prospect" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->nom_du_prospect }}" required />
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Prénom</label>
+                            <input type="text" name="prenom_du_prospect" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->prenom_du_prospect }}" required />
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Téléphone</label>
+                            <input type="text" name="telephone" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->telephone }}" required />
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Adresse</label>
+                            <input type="text" name="adresse" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->adresse }}" required />
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Code Postal</label>
+                            <input type="text" name="code_postal" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->code_postal }}" required />
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Ville</label>
+                            <input type="text" name="ville" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->ville }}" required />
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Date du RDV</label>
+                            <input type="datetime-local" name="date_du_rdv" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->date_du_rdv ? date('Y-m-d\TH:i', strtotime($rdv->date_du_rdv)) : '' }}" required />
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Statut de résidence</label>
+                            <input type="text" name="statut_de_residence" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->statut_de_residence }}" required />
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="fw-semibold fs-6 mb-2">Commentaire agent</label>
+                            <textarea name="Commentaire_agent" class="form-control form-control-solid mb-3 mb-lg-0" rows="3">{{ $rdv->Commentaire_agent }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> --}}
+@endforeach
 
 @if(session('success'))
     <div class="alert alert-success">
