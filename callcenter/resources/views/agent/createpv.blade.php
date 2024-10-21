@@ -44,7 +44,7 @@
 
         <div class="card mb-4">
             <div class="card-header">
-                <h4 class="mb-0 text-center">Adresse</h4>
+                <h4 class="mb-0 text-center">Adresse complète</h4>
             </div>
             <div class="card-body">
                 <div class="row g-3">

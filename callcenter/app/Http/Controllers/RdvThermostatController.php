@@ -127,7 +127,7 @@ public function getRdvByAgent()
 {
 
     $userId = Auth::id();
-    $rdvRecords = RdvThermostat::where('agent_id', $userId)->get();
+    $rdvRecords = RdvThermostat::where('agent_id', $userId)->paginate(20);
     return view('agent.indexthermostat', compact('rdvRecords'));
 }
 public function getRdvForPartenaireQualifier()

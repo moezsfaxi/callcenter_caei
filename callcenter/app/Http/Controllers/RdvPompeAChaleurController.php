@@ -68,7 +68,7 @@ class RdvPompeAChaleurController extends Controller
 public function getRdvByAgent()
     {
         $userId = Auth::id();
-        $rdvRecords = RdvPompeAChaleur::where('agent_id', $userId)->get();
+        $rdvRecords = RdvPompeAChaleur::where('agent_id', $userId)->paginate(20);
         return view('agent.indexpac', compact('rdvRecords'));
     }
     public function getRdvForPartenaireQualifier()

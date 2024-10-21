@@ -85,7 +85,7 @@ public function assignrdv(Request $request, $id)
     {
 
         $userId = Auth::id();
-        $rdvRecords = RdvPanneauxPhotovoltaique::where('agent_id', $userId)->get();
+        $rdvRecords = RdvPanneauxPhotovoltaique::where('agent_id', $userId)->paginate(20);
         return view('agent.indexpv', compact('rdvRecords'));
     }
 

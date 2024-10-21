@@ -91,7 +91,7 @@
 											<div class="d-flex flex-column text-center">
 												<div class="fw-bold d-flex align-items-center justify-content-center fs-5">
 													{{ Auth::user()->name }}
-													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Agent</span>
 												</div>
 												<a href="#" class="fw-semibold text-muted text-hover-primary fs-7 mb-2" style="word-break: break-all;">{{ Auth::user()->email }}</a>
 											</div>
@@ -102,18 +102,14 @@
 									<!--begin::Menu separator-->
 									<div class="separator my-2"></div>
 									<!--end::Menu separator-->
-									<!--begin::Menu item-->
-									<div class="menu-item px-5">
-										<a href="{{ route('profile.edit') }}" class="menu-link px-5">{{ __('Profile') }}</a>
-									</div>
-									<!--end::Menu item-->
+
 									<!--begin::Menu item-->
 									<div class="menu-item px-5">
 										<form method="POST" action="{{ route('logout') }}">
 											@csrf
 											<a href="{{ route('logout') }}" class="menu-link px-5"
 											   onclick="event.preventDefault(); this.closest('form').submit();">
-												{{ __('Log Out') }}
+                                               Se déconnecter
 											</a>
 										</form>
 									</div>
@@ -172,9 +168,9 @@
 							<!--begin::Sidebar menu-->
 							<div id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false" class="flex-column-fluid menu menu-sub-indention menu-column menu-rounded menu-active-bg mb-7">
 								<!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+								<div class="menu-item here show menu-accordion">
 									<!--begin:Menu link-->
-									<span class="menu-link">
+                                    <a class="menu-link" href="{{ route('agent-dashboard-login') }}" >
 										<span class="menu-icon">
 											<i class="ki-duotone ki-element-11 fs-1">
 												<span class="path1"></span>
@@ -184,11 +180,12 @@
 											</i>
 										</span>
 										<span class="menu-title">Dashboards</span>
-										<span class="menu-arrow"></span>
-									</span>
+									</a>
 									<!--end:Menu link-->
 								</div>
 								<!--end:Menu item-->
+
+
 								<!--begin:Menu item-->
 								<div class="menu-item">
 									<!--begin:Menu link-->
@@ -199,7 +196,7 @@
 												<span class="path2"></span>
 											</i>
 										</span>
-										<span class="menu-title">Rendez-vous Thermostat</span>
+										<span class="menu-title">RDV Thermostat</span>
 									</a>
 									<!--end:Menu link-->
 								</div>
@@ -217,7 +214,7 @@
 												<span class="path3"></span>
 											</i>
 										</span>
-										<span class="menu-title">Rendez vous Panneaux</span>
+										<span class="menu-title">RDV Panneaux</span>
 									</a>
 									<!--end:Menu link-->
 								</div>
@@ -233,7 +230,7 @@
 												<span class="path2"></span>
 											</i>
 										</span>
-										<span class="menu-title">Rendez vous Pompe à Chaleur</span>
+										<span class="menu-title">RDV PAC</span>
 									</a>
 									<!--end:Menu link-->
 								</div>
