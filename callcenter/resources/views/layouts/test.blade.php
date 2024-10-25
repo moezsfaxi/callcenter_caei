@@ -24,6 +24,12 @@
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
 		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+		    <!-- Fonts -->
+			<link rel="preconnect" href="https://fonts.bunny.net">
+           <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 		<!--end::Global Stylesheets Bundle-->
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
@@ -53,7 +59,7 @@
 							<!--end::Sidebar mobile toggle-->
 							<!--begin::Logo-->
 							<a href="#" class="app-sidebar-logo ">
-								<img alt="Logo" src="{{ asset('assets/media/logos/logo1.png') }}"style="width: 200px; height: 80px; object-fit: contain; image-rendering: crisp-edges;"" />
+								<img alt="Logo" src="{{ asset('assets/media/logos/logo1.png') }}"style="width: 200px; height: 80px; object-fit: contain; image-rendering: crisp-edges;" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Sidebar toggle-->

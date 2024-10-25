@@ -46,4 +46,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function rdvPanneauxPhotovoltaiques()
+    {
+        return $this->hasMany(RdvPanneauxPhotovoltaique::class, 'agent_id');
+    }
+
+    public function rdvPompeAChaleurs()
+    {
+        return $this->hasMany(RdvPompeAChaleur::class, 'agent_id');
+    }
+
+    public function rdvThermostats()
+    {
+        return $this->hasMany(RdvThermostat::class, 'agent_id');
+    }
+
+
 }

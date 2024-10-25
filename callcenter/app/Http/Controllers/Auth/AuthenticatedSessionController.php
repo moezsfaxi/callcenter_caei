@@ -15,9 +15,32 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create()
     {
-        return view('auth.login');
+        $user = Auth::user();
+
+if ($user) {
+    $role = $user->role;
+    switch ($role) {
+        case 'agent':
+            return redirect()->route('agent-dashboard-login');
+            
+        case 'admin':
+            return redirect()->route('admin-dashboard-login');
+         
+        case 'partenaire':
+            return redirect()->route('partenaire-dashboard-login');
+       
+        case 'superviseur':
+            return redirect()->route('superviseur-dashboard-login');
+          
+        default:
+      
+            return redirect()->route('first-page');
+    }}
+     else {
+    return view('auth.login');
+    }
     }
 
     /**
@@ -29,6 +52,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         $user = $request->user();
+
         $role = $user->role;
 
 
@@ -46,7 +70,8 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->route('superviseur-dashboard-login');
               
             default:
-                return redirect()->route('dashboard');
+          
+                return redirect()->route('first-page');
         }
 
 
@@ -63,6 +88,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('first-page');
     }
 }

@@ -144,12 +144,12 @@ public function getRdvForPartenaireQualifier()
 
 public function getRdvForPartenaire()
 {
-    $userId = Auth::id(); // Récupère l'ID de l'utilisateur connecté
-    // Récupère les RDV non qualifiés pour le partenaire avec pagination
+    $userId = Auth::id(); 
+    
     $rdvRecords = RdvThermostat::where('partenaire_id', $userId)
-        ->whereNull('classification') // Filtre pour les RDV non qualifiés
+        ->whereNull('classification') 
         ->orderBy('created_at', 'desc')
-        ->paginate(20); // Ajoute la pagination, 20 éléments par page
+        ->paginate(20); 
 
     return view('partenaire.indexthermostat', compact('rdvRecords'));
 }
@@ -171,6 +171,16 @@ public function getRdvForPartenaire()
 
         return redirect()->route('superviseur-rdv-thermostat.index')->with('success', 'RDV updated successfully');
     }
+
+    public function indexforadmin()
+    {
+        $rdvRecords = RdvThermostat::orderBy('created_at', 'desc')->paginate(20);
+        
+
+        return view('admin.indexthermostat', compact('rdvRecords'));
+    }
+
+
 
 
 }

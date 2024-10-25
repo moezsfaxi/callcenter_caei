@@ -20,7 +20,7 @@ class EnsureUserIsSuperviseur
         }
 
        
-        return redirect()->route('/login')->with('error', 'Access denied. You must be an agent to perform this action.');
+        return redirect()->route('/login')->with('error', 'Access denied. You must be an superviseur to perform this action.');
      
     }
 }

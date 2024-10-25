@@ -108,7 +108,7 @@ public function getRdvByAgent()
         $rdv = RdvPompeAChaleur::findOrFail($id);
         $rdv->delete();
 
-        return redirect()->route('dashboard')->with('success', 'RDV deleted successfully');
+        return redirect()->route('first-page')->with('success', 'RDV deleted successfully');
     }
 
     public function getRdvQualifiesForPartenaire()
@@ -163,4 +163,15 @@ public function getRdvByAgent()
 
         return redirect()->back()->with('success', 'Rendez-vous pompe à chaleur mis à jour avec succès');
     }
+
+    public function indexforadmin()
+    {
+        $rdvRecords = RdvPompeAChaleur::orderBy('created_at', 'desc')->paginate(20);
+
+        return view('admin.indexpac', compact('rdvRecords'));
+    }
+
+
+
+
 }

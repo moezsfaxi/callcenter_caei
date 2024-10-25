@@ -20,7 +20,7 @@ class EnsureUserIsAdmin
         }
 
        
-        return redirect()->route('/login')->with('error', 'Access denied. You must be an agent to perform this action.');
+        return redirect()->route('/login')->with('error', 'Access denied. You must be an admin to perform this action.');
      
     }
 }

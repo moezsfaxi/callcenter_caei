@@ -20,7 +20,7 @@ class EnsureUserIsPartenaire
         }
 
        
-        return redirect()->route('/login')->with('error', 'Access denied. You must be an agent to perform this action.');
+        return redirect()->route('/login')->with('error', 'Access denied. You must be an partenaire to perform this action.');
      
     }
 }

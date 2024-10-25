@@ -1,27 +1,28 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RdvPanneauxPhotovoltaiqueController;
 use App\Http\Controllers\RdvPompeAChaleurController;
 use App\Http\Controllers\RdvThermostatController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[AuthenticatedSessionController::class, 'create'] )->name('first-page');
+Route::post('/', [AuthenticatedSessionController::class, 'store'])->name('posthome');
 
 
 Route::get('/dashboard', function () { return view('dashboard');})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 Route::middleware(['auth','agent'])->group(function(){
 
+Route::get('/feed-agent',[PostController::class ,'agentpost'])->name('agent-post');
 Route::get('agent/dashboard',[dashboardController::class ,'agentdashboard'] )->name('agent-dashboard-login');
 Route::post('agent-rdv-panneaux-photovoltaique',[RdvPanneauxPhotovoltaiqueController::class ,'store'])->name('rdv-panneaux-photovoltaique.store');
 Route::post('agent-rdv-pompe-a-chaleur',[RdvPompeAChaleurController::class,'store'])->name('rdv-pompe-a-chaleur.store');
@@ -35,6 +36,7 @@ Route::get('/rdv-panneaux-photovoltaique/create', [RdvPanneauxPhotovoltaiqueCont
 
 });
 Route::middleware(['auth','partenaire'])->group(function(){
+    Route::get('/feed-partenaire',[PostController::class ,'partenairepost'])->name('partenaire-post');
     Route::get('partenaire/dashboard',[dashboardController::class ,'partenairedashboard'] )->name('partenaire-dashboard-login');
     Route::put('/partenaire-rdv-panneaux-photovoltaique/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'update'])->name('rdv-panneaux-photovoltaique.update');
     Route::put('/partenaire-rdv-pompe-a-chaleur/{id}', [RdvPompeAChaleurController::class, 'update'])->name('rdv-pompe-a-chaleur.update');
@@ -51,6 +53,7 @@ Route::middleware(['auth','partenaire'])->group(function(){
 });
 
 Route::middleware(['auth','superviseur'])->group(function(){
+    Route::get('/feed-superviseur',[PostController::class ,'superviseurpost'])->name('superviseur-post');
     Route::get('superviseur/dashboard',[dashboardController::class ,'superviseurdashboard'] )->name('superviseur-dashboard-login');
     Route::put('/superviseur-rdv-panneaux-photovoltaique/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'assignrdv'])->name('rdv-panneaux-photovoltaique.assignrdv');
     Route::put('/superviseur-rdv-pompe-a-chaleur/{id}', [RdvPompeAChaleurController::class, 'assignrdv'])->name('rdv-pompe-a-chaleur.assignrdv');
@@ -69,11 +72,29 @@ Route::middleware(['auth','superviseur'])->group(function(){
 
 
 Route::middleware(['auth','admin'])->group(function(){
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('admin/create',[UserController::class ,'create'] )->name('create_users'); 
+    Route::post('admin/createpost',[UserController::class ,'store'] )->name('create_users_store');        
     Route::get('/admin-dashboard',[dashboardController::class ,'admindashboard'] )->name('admin-dashboard-login');
-    Route::get('/all-admin-rdv-pompe-a-chaleur', [RdvPompeAChaleurController::class, 'index'])->name('admin-rdv-pompe-a-chaleur.index');
-    Route::get('/all-admin-rdv-panneaux-photovoltaique', [RdvPanneauxPhotovoltaiqueController::class, 'index'])->name('admin-rdv-panneaux-photovoltaique.index');
-    Route::get('/all-admin-rdv-thermostat', [RdvThermostatController::class, 'index'])->name('admin-rdv-thermostat.index');
+    Route::get('/all-admin-rdv-pompe-a-chaleur',[RdvPompeAChaleurController::class, 'indexforadmin'])->name('admin-rdv-pompe-a-chaleur.index');
+    Route::get('/all-admin-rdv-panneaux-photovoltaique',[RdvPanneauxPhotovoltaiqueController::class, 'indexforadmin'])->name('admin-rdv-panneaux-photovoltaique.index');
+    Route::get('/all-admin-rdv-thermostat',[RdvThermostatController::class, 'indexforadmin'])->name('admin-rdv-thermostat.index');
+    Route::get('/feed' ,[PostController::class  , 'create'] )->name('feed-admin');
+    Route::get('/createpost',[PostController::class,'createpost'])->name('create-post-admin');
+    Route::post('/sendpost' ,[PostController::class,'store'])->name('save-post-admin');
+    Route::delete('/deletepost/{id}',[PostController::class , 'destroy'])->name('delete-post');
+    Route::get('/posts/{id}/edit', [PostController::class, 'gotoeditview'])->name('edit-post');
+    Route::put('/updatepost',[PostController::class,'update'])->name('update-post');
+
+
+
+
 });
+
+Route::get('/user/edit/{id}',[ProfileController::class,'edittheuser'])->name('user.edit-foryou');
+Route::put('/user/edit/{id}',[ProfileController::class,'updateallusers'])->name('user.edit-every-field');
 
 
 

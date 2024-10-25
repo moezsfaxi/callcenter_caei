@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('statut_de_residence');
             $table->text('Commentaire_agent') ;
             $table->text('Commentaire_partenaire')->nullable() ;
-            $table->text('classification')->nullable() ;
+            $table->enum('classification', ['NRP','Hors cible','RDV confirmé','RDV installé','Pas intéressé','RDV annulé','RDV à rappeler'])->nullable();
             $table->text('date_classification')->nullable() ;
             $table->text('date_rappelle')->nullable() ;
             $table->timestamps();

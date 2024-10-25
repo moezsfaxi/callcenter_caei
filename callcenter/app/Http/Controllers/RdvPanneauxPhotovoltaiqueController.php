@@ -115,7 +115,7 @@ public function assignrdv(Request $request, $id)
     {
         $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
         $rdv->delete();
-        return redirect()->route('dashboard')->with('success', 'RDV deleted successfully');
+        return redirect()->route('first-page')->with('success', 'RDV deleted successfully');
     }
 
     public function updatequalification(Request $request, $id)
@@ -152,7 +152,7 @@ public function assignrdv(Request $request, $id)
 
         $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
 
-        // Update only the fields that are present in the request
+        
         foreach ($validatedData as $key => $value) {
             if (!is_null($value)) {
                 $rdv->$key = $value;
@@ -163,4 +163,17 @@ public function assignrdv(Request $request, $id)
 
         return redirect()->back()->with('success', 'Rendez-vous pompe à chaleur mis à jour avec succès');
     }
+       
+    public function indexforadmin()
+    {
+        $rdvRecords = RdvPanneauxPhotovoltaique::orderBy('created_at', 'desc')->paginate(20);
+        
+
+        return view('admin.indexpv', compact('rdvRecords'));
+    }
+
+
+
+
+
 }

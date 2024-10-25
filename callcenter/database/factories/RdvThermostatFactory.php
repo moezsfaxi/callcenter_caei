@@ -21,8 +21,8 @@ class RdvThermostatFactory extends Factory
      public function definition(): array
     {
         return [
-            'agent_id' => User::factory(), 
-            'partenaire_id' => User::factory(), 
+            'agent_id' => 2, 
+            'partenaire_id' => 4, 
             'nom_du_prospect' => $this->faker->name(),
             'prenom_du_prospect' => $this->faker->firstName(),
             'telephone' => $this->faker->phoneNumber(),
@@ -33,7 +33,7 @@ class RdvThermostatFactory extends Factory
             'statut_de_residence' => $this->faker->word(),
             'Commentaire_agent' => $this->faker->sentence(),
             'Commentaire_partenaire' => $this->faker->sentence(),
-            'classification' => $this->faker->word(),
+            'classification' => null,
             'date_classification' => $this->faker->date(),
             'date_rappelle' => $this->faker->date(),
         ];
