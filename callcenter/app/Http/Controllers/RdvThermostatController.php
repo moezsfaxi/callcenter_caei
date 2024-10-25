@@ -137,7 +137,7 @@ public function getRdvForPartenaireQualifier()
     // Récupère les RDV qualifiés pour le partenaire
     $rdvRecords = RdvThermostat::where('partenaire_id', $userId)
         ->whereNotNull('classification') // Filtre pour les RDV qualifiés
-        ->get();
+        ->paginate(20); // Ajoute la pagination, 20 éléments par page
 
     return view('partenaire.rdvqualifierthermostat', compact('rdvRecords')); // Renvoie la vue avec les RDV qualifiés
 }

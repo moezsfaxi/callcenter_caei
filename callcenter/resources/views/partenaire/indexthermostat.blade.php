@@ -143,13 +143,8 @@
                         </table>
                         <!--end::Table-->
 
-                        <!--begin::Pagination-->
-                        <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <div class="d-flex flex-wrap py-2 mr-3">
-                                {{ $rdvRecords->links() }}
-                            </div>
-                        </div>
-                        <!--end::Pagination-->
+                        {{ $rdvRecords->links() }}
+
                     </div>
                     <!--end::Card body-->
                 </div>
