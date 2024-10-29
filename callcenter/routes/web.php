@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RdvAuditController;
 use App\Http\Controllers\RdvPanneauxPhotovoltaiqueController;
 use App\Http\Controllers\RdvPompeAChaleurController;
 use App\Http\Controllers\RdvThermostatController;
@@ -25,30 +26,44 @@ Route::middleware(['auth','agent'])->group(function(){
 Route::get('/feed-agent',[PostController::class ,'agentpost'])->name('agent-post');
 Route::get('agent/dashboard',[dashboardController::class ,'agentdashboard'] )->name('agent-dashboard-login');
 Route::post('agent-rdv-panneaux-photovoltaique',[RdvPanneauxPhotovoltaiqueController::class ,'store'])->name('rdv-panneaux-photovoltaique.store');
+Route::post('agent-rdv-audit',[RdvAuditController::class ,'store'])->name('rdv-audit.store');
 Route::post('agent-rdv-pompe-a-chaleur',[RdvPompeAChaleurController::class,'store'])->name('rdv-pompe-a-chaleur.store');
 Route::get('/rdv-thermostat/create', [RdvThermostatController::class, 'create'])->name('rdv.thermostat.create');
 Route::post('agent-rdv-thermostat',[RdvThermostatController::class,'store'])->name('rdv-thermostat.store');
 Route::get('/rdv-pompe-a-chaleur/agent', [RdvPompeAChaleurController::class, 'getRdvByAgent'])->name('rdv.PompeAChaleurAgent');
 Route::get('/rdv-panneaux-photovoltaique/agent', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvByAgent'])->name('rdv.PanneauxPhotovoltaiqueAgent');
+Route::get('/rdv-audit/agent', [RdvAuditController::class, 'getRdvByAgent'])->name('rdv.auditAgent');
 Route::get('/rdv-thermostat/agent', [RdvThermostatController::class, 'getRdvByAgent'])->name('rdv.ThermostatAgent');
 Route::get('/rdv-pompe-a-chaleur/create', [RdvPompeAChaleurController::class, 'create'])->name('rdv.pompe-a-chaleur.create');
 Route::get('/rdv-panneaux-photovoltaique/create', [RdvPanneauxPhotovoltaiqueController::class, 'create'])->name('rdv.panneaux-photovoltaique.create');
+Route::get('/rdv-audit/create', [RdvAuditController::class, 'create'])->name('rdv.audit.create');
 
 });
 Route::middleware(['auth','partenaire'])->group(function(){
     Route::get('/feed-partenaire',[PostController::class ,'partenairepost'])->name('partenaire-post');
     Route::get('partenaire/dashboard',[dashboardController::class ,'partenairedashboard'] )->name('partenaire-dashboard-login');
     Route::put('/partenaire-rdv-panneaux-photovoltaique/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'update'])->name('rdv-panneaux-photovoltaique.update');
+    Route::put('/partenaire-rdv-audit/{id}', [RdvAuditController::class, 'update'])->name('rdv-audit.update');
+
+
     Route::put('/partenaire-rdv-pompe-a-chaleur/{id}', [RdvPompeAChaleurController::class, 'update'])->name('rdv-pompe-a-chaleur.update');
     Route::put('/partenaire-rdv-thermostat/{id}', [RdvThermostatController::class, 'update'])->name('rdv-thermostat.update');
     Route::get('/rdv-thermostat/partenaire', [RdvThermostatController::class, 'getRdvForPartenaire'])->name('rdv.Thermostatpartenaire');
     Route::get('/rdv-pompe-a-chaleur/partenaire', [RdvPompeAChaleurController::class, 'getRdvForPartenaire'])->name('rdv.PompeAChaleurpartenaire');
     Route::get('/rdv-panneaux-photovoltaique/partenaire', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvForPartenaire'])->name('rdv.PanneauxPhotovoltaiquepartenaire');
+    Route::get('/rdv-audit/partenaire', [RdvAuditController::class, 'getRdvForPartenaire'])->name('rdv.auditpartenaire');
+
     Route::get('/rdv-panneaux-photovoltaique/partenaire/Qualifie', [RdvPanneauxPhotovoltaiqueController::class, 'getRdvForPartenaireQualified'])->name('rdv.QPanneauxPhotovoltaiquepartenaire');
+    Route::get('/rdv-audit/partenaire/Qualifie', [RdvAuditController::class, 'getRdvForPartenaireQualified'])->name('rdv.Qauditpartenaire');
+
+
     Route::get('/partenaire/rdv-pompe-a-chaleur/qualifies', [RdvPompeAChaleurController::class, 'getRdvQualifiesForPartenaire'])->name('rdv.pompeachaleur.qualifies');
     Route::get('/partenaire/rdv-thermostat/qualifies', [RdvThermostatController::class, 'getRdvForPartenaireQualifier'])->name('rdv.thermostat.qualifies');
     Route::put('/rdv-thermostat/{id}/updatequalification', [RdvThermostatController::class, 'updatequalification'])->name('rdv-thermostat.updatequalification');
     Route::put('/rdv-panneaux-photovoltaique/{id}/updatequalification', [RdvPanneauxPhotovoltaiqueController::class, 'updatequalification'])->name('rdv-pv.updatequalification');
+    Route::put('/rdv-audit/{id}/updatequalification', [RdvAuditController::class, 'updatequalification'])->name('rdv-audit.updatequalification');
+
+
     Route::put('/rdv-pompe-a-chaleur/{id}/updatequalification', [RdvPompeAChaleurController::class, 'updatequalification'])->name('rdv-pompe.updatequalification');
 });
 
@@ -56,17 +71,28 @@ Route::middleware(['auth','superviseur'])->group(function(){
     Route::get('/feed-superviseur',[PostController::class ,'superviseurpost'])->name('superviseur-post');
     Route::get('superviseur/dashboard',[dashboardController::class ,'superviseurdashboard'] )->name('superviseur-dashboard-login');
     Route::put('/superviseur-rdv-panneaux-photovoltaique/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'assignrdv'])->name('rdv-panneaux-photovoltaique.assignrdv');
+    Route::put('/superviseur-rdv-audit/{id}', [RdvAuditController::class, 'assignrdv'])->name('rdv-audit.assignrdv');
+
+
     Route::put('/superviseur-rdv-pompe-a-chaleur/{id}', [RdvPompeAChaleurController::class, 'assignrdv'])->name('rdv-pompe-a-chaleur.assignrdv');
     Route::put('/superviseur-rdv-thermostat/{id}', [RdvThermostatController::class, 'assignrdv'])->name('rdv-thermostat.assignrdv');
     Route::delete('/rdv-pompe-a-chaleur-superviseur/{id}', [RdvPompeAChaleurController::class, 'destroy'])->name('rdv-pompe-a-chaleur.destroy');
     Route::delete('/rdv-panneaux-photovoltaique-superviseur/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'destroy'])->name('rdv-panneaux-photovoltaique.destroy');
+    Route::delete('/rdv-audit/{id}', [RdvAuditController::class, 'destroy'])->name('rdv-audit.destroy');
+
+
     Route::delete('/rdv-thermostat-superviseur/{id}', [RdvThermostatController::class, 'destroy'])->name('rdv-thermostat.destroy');
     Route::get('/all-superviseur-rdv-pompe-a-chaleur', [RdvPompeAChaleurController::class, 'index'])->name('superviseur-rdv-pompe-a-chaleur.index');
     Route::get('/all-superviseur-rdv-panneaux-photovoltaique', [RdvPanneauxPhotovoltaiqueController::class, 'index'])->name('superviseur-rdv-panneaux-photovoltaique.index');
+    Route::get('/all-superviseur-rdv-audit', [RdvAuditController::class, 'index'])->name('superviseur-rdv-audit.index');
+
+
     Route::get('/all-superviseur-rdv-thermostat', [RdvThermostatController::class, 'index'])->name('superviseur-rdv-thermostat.index');
     Route::put('/rdv-thermostat/{id}', [RdvThermostatController::class, 'updaterdvThermostat'])->name('rdv.thermostat.update');
     Route::put('/rdv-pompe-a-chaleur/{id}', [RdvPompeAChaleurController::class, 'updateRdvPompeAChaleur'])->name('rdv.pompe-a-chaleur.update');
     Route::put('/rdv-panneaux/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'updateRdvPanneau'])->name('rdv.panneaux.update');
+    Route::put('/rdv-audit/{id}', [RdvAuditController::class, 'updateRdvPanneau'])->name('rdv.audit.update');
+
 
 });
 
@@ -80,6 +106,9 @@ Route::middleware(['auth','admin'])->group(function(){
     Route::get('/admin-dashboard',[dashboardController::class ,'admindashboard'] )->name('admin-dashboard-login');
     Route::get('/all-admin-rdv-pompe-a-chaleur',[RdvPompeAChaleurController::class, 'indexforadmin'])->name('admin-rdv-pompe-a-chaleur.index');
     Route::get('/all-admin-rdv-panneaux-photovoltaique',[RdvPanneauxPhotovoltaiqueController::class, 'indexforadmin'])->name('admin-rdv-panneaux-photovoltaique.index');
+    Route::get('/all-admin-rdv-audit',[RdvAuditController::class, 'indexforadmin'])->name('admin-rdv-audit.index');
+
+
     Route::get('/all-admin-rdv-thermostat',[RdvThermostatController::class, 'indexforadmin'])->name('admin-rdv-thermostat.index');
     Route::get('/feed' ,[PostController::class  , 'create'] )->name('feed-admin');
     Route::get('/createpost',[PostController::class,'createpost'])->name('create-post-admin');

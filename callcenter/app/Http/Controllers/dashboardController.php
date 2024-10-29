@@ -120,7 +120,7 @@ class dashboardController extends Controller
 
 
         //dd($statistics);
-        return view('admin/dashboard', compact('statistics'));
+        return view('agent/dashboard', compact('statistics'));
     }
 
 
@@ -212,17 +212,17 @@ class dashboardController extends Controller
 
         $partenaireStatistics = User::where('role', 'partenaire')
     ->withCount([
-        'rdvPanneauxPhotovoltaiques as rdvPanneaux',
-        'rdvPompeAChaleurs as rdvPompe',
-        'rdvThermostats as rdvThermostat'
+        'rdvPanneauxPhotovoltaiquesp as rdvPanneauxp',
+        'rdvPompeAChaleursp as rdvPompep',
+        'rdvThermostatsp as rdvThermostatp'
     ])
     ->get()
     ->map(function ($partenaire) {
         return [
             'partenaire_name' => $partenaire->name,
-            'rdvPanneaux' => $partenaire->rdvPanneaux ?? 0,
-            'rdvPompe' => $partenaire->rdvPompe ?? 0,
-            'rdvThermostat' => $partenaire->rdvThermostat ?? 0,
+            'rdvPanneaux' => $partenaire->rdvPanneauxp ?? 0,
+            'rdvPompe' => $partenaire->rdvPompep ?? 0,
+            'rdvThermostat' => $partenaire->rdvThermostatp ?? 0,
         ];
     });
     
@@ -232,7 +232,7 @@ class dashboardController extends Controller
         //     "partenaire_statistics" => $partenaireStatistics
         // ]);
     
-        return view('agent/dashboard', compact('statistics','agentStatistics','partenaireStatistics'));
+        return view('admin/dashboard', compact('statistics','agentStatistics','partenaireStatistics'));
     }
 
 
@@ -313,26 +313,27 @@ class dashboardController extends Controller
 
         $partenaireStatistics = User::where('role', 'partenaire')
     ->withCount([
-        'rdvPanneauxPhotovoltaiques as rdvPanneaux',
-        'rdvPompeAChaleurs as rdvPompe',
-        'rdvThermostats as rdvThermostat'
+        'rdvPanneauxPhotovoltaiquesp as rdvPanneauxp',
+        'rdvPompeAChaleursp as rdvPompep',
+        'rdvThermostatsp as rdvThermostatp'
     ])
     ->get()
     ->map(function ($partenaire) {
         return [
             'partenaire_name' => $partenaire->name,
-            'rdvPanneaux' => $partenaire->rdvPanneaux ?? 0,
-            'rdvPompe' => $partenaire->rdvPompe ?? 0,
-            'rdvThermostat' => $partenaire->rdvThermostat ?? 0,
+            'rdvPanneaux' => $partenaire->rdvPanneauxp ?? 0,
+            'rdvPompe' => $partenaire->rdvPompep ?? 0,
+            'rdvThermostat' => $partenaire->rdvThermostatp ?? 0,
         ];
     });
     
-        dd([
-            'statistics' => $statistics,
-            'agent_statistics' => $agentStatistics,
-            "partenaire_statistics" => $partenaireStatistics
-        ]);
-        return view('superviseur/dashboard',"statistics","agentStatistics","partenaireStatistics");
+        // dd([
+        //     'statistics' => $statistics,
+        //     'agent_statistics' => $agentStatistics,
+        //     "partenaire_statistics" => $partenaireStatistics
+        // ]);
+        return view('superviseur/dashboard',compact('statistics','agentStatistics','partenaireStatistics'));
+        
     }
    
    

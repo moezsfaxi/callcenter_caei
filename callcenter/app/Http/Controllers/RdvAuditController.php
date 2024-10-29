@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-
-
 use Illuminate\Http\Request;
-use App\Models\RdvPanneauxPhotovoltaique;
+use App\Models\RdvAudit;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class RdvPanneauxPhotovoltaiqueController extends Controller
+class RdvAuditController extends Controller
 {
 
     public function index()
     {
-        $rdvRecords = RdvPanneauxPhotovoltaique::orderBy('created_at', 'desc')->paginate(20);
+        $rdvRecords = RdvAudit::orderBy('created_at', 'desc')->paginate(20);
         $partenaires = User::where('role', 'partenaire')->get();
 
-        return view('superviseur.indexpanneau', compact('rdvRecords', 'partenaires'));
+        return view('superviseur.indexaudit', compact('rdvRecords', 'partenaires'));
     }
 
     public function create()
@@ -43,7 +41,7 @@ class RdvPanneauxPhotovoltaiqueController extends Controller
 
     ]);
      // Vérification si le numéro de téléphone existe déjà dans la base de données
-     $existingRdv = RdvPanneauxPhotovoltaique::where('telephone', $request->telephone)->first();
+     $existingRdv = RdvAudit::where('telephone', $request->telephone)->first();
 
      if ($existingRdv) {
          // Si le numéro de téléphone existe déjà, on redirige avec un message d'erreur
@@ -52,8 +50,8 @@ class RdvPanneauxPhotovoltaiqueController extends Controller
              ->withErrors(['telephone' => 'Ce numéro de téléphone a déjà été utilisé pour un autre rendez-vous.']);
      }
     $validatedData['agent_id'] = Auth::id();
-    $rdv = RdvPanneauxPhotovoltaique::create($validatedData);
-    return redirect()->route('rdv.PanneauxPhotovoltaiqueAgent')->with('success', 'RDV created successfully');
+    $rdv = RdvAudit::create($validatedData);
+    return redirect()->route('rdv.auditAgent')->with('success', 'RDV created successfully');
 }
 
 public function update(Request $request, $id)
@@ -64,9 +62,9 @@ public function update(Request $request, $id)
         'classification' => 'required|string',
         'date_rappelle' => 'nullable|date',
     ]);
-    $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
+    $rdv = RdvAudit::findOrFail($id);
     $rdv->update($validatedData);
-    return redirect()->route('rdv.PanneauxPhotovoltaiquepartenaire')->with('success', 'RDV updated successfully');
+    return redirect()->route('rdv.auditpartenaire')->with('success', 'RDV updated successfully');
 }
 
 public function assignrdv(Request $request, $id)
@@ -76,17 +74,17 @@ public function assignrdv(Request $request, $id)
         'partenaire_id' => 'required| numeric',
 
     ]);
-    $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
+    $rdv = RdvAudit::findOrFail($id);
     $rdv->update($validatedData);
-    return redirect()->route('superviseur-rdv-panneaux-photovoltaique.index')->with('success', 'RDV updated successfully');
+    return redirect()->route('superviseur-rdv-audit.index')->with('success', 'RDV updated successfully');
 }
 
    public function getRdvByAgent()
     {
 
         $userId = Auth::id();
-        $rdvRecords = RdvPanneauxPhotovoltaique::where('agent_id', $userId)->paginate(20);
-        return view('agent.indexpv', compact('rdvRecords'));
+        $rdvRecords = RdvAudit::where('agent_id', $userId)->paginate(20);
+        return view('agent.indexaudit', compact('rdvRecords'));
     }
 
 
@@ -94,26 +92,26 @@ public function assignrdv(Request $request, $id)
     {
         $userId = Auth::id();
          // Récupère les RDV non qualifiés pour le partenaire
-        $rdvRecords = RdvPanneauxPhotovoltaique::where('partenaire_id', $userId)
+        $rdvRecords = RdvAudit::where('partenaire_id', $userId)
          ->whereNull('classification') // Filtre pour les RDV non qualifiés
          ->orderBy('created_at', 'desc')
-         ->paginate(1000); // Ajoute la pagination, 20 éléments par page
-        return view('partenaire.indexpanneau', compact('rdvRecords'));
+         ->paginate(1000); 
+        return view('partenaire.indexaudit', compact('rdvRecords'));
     }
     public function getRdvForPartenaireQualified()
 {
     $userId = Auth::id();
-    $rdvRecords = RdvPanneauxPhotovoltaique::where('partenaire_id', $userId)
+    $rdvRecords = RdvAudit::where('partenaire_id', $userId)
                     ->whereNotNull('classification')  // Pour les RDV qualifiés
                     ->orderBy('created_at', 'desc')
                     ->paginate(1000); // Ajoute la pagination, 20 éléments par page
 
-    return view('partenaire.rdvqualifierpv', compact('rdvRecords'));
+    return view('partenaire.rdvqualifieraudit', compact('rdvRecords'));
 }
 
     public function destroy($id)
     {
-        $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
+        $rdv = RdvAudit::findOrFail($id);
         $rdv->delete();
         return redirect()->route('first-page')->with('success', 'RDV deleted successfully');
     }
@@ -126,7 +124,7 @@ public function assignrdv(Request $request, $id)
             'date_rappelle' => 'nullable|date',
         ]);
 
-        $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
+        $rdv = RdvAudit::findOrFail($id);
 
         $rdv->classification = $validatedData['classification'];
         $rdv->Commentaire_partenaire = $validatedData['Commentaire_partenaire'];
@@ -134,7 +132,7 @@ public function assignrdv(Request $request, $id)
 
         $rdv->save();
 
-        return redirect()->route('rdv.QPanneauxPhotovoltaiquepartenaire')->with('success', 'Rendez-vous mis à jour avec succès');
+        return redirect()->route('rdv.Qauditpartenaire')->with('success', 'Rendez-vous mis à jour avec succès');
     }
     public function updateRdvPanneau(Request $request, $id)
     {
@@ -150,7 +148,7 @@ public function assignrdv(Request $request, $id)
             'Commentaire_agent' => 'nullable|string',
         ]);
 
-        $rdv = RdvPanneauxPhotovoltaique::findOrFail($id);
+        $rdv = RdvAudit::findOrFail($id);
 
         
         foreach ($validatedData as $key => $value) {
@@ -166,10 +164,10 @@ public function assignrdv(Request $request, $id)
        
     public function indexforadmin()
     {
-        $rdvRecords = RdvPanneauxPhotovoltaique::orderBy('created_at', 'desc')->paginate(20);
+        $rdvRecords = RdvAudit::orderBy('created_at', 'desc')->paginate(20);
         
 
-        return view('admin.indexpv', compact('rdvRecords'));
+        return view('admin.indexaudit', compact('rdvRecords'));
     }
 
 

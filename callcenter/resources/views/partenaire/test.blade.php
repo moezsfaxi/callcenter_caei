@@ -2,7 +2,7 @@
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href=""/>
-		<title>Saul Theme by Keenthemes</title>
+		<title>Caei Call center</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="Saul HTML Free - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme" />
 		<meta name="keywords" content="Saul, bootstrap, bootstrap 5, dmin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
@@ -201,6 +201,55 @@
 									</a>
 									<!--end:Menu link-->
 								</div>
+								<!-- Rdv Panneaux audit -->
+								<!--begin:Menu item-->
+								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+									<!--begin:Menu link-->
+									<span class="menu-link">
+									<span class="menu-icon">
+											<i class="ki-duotone ki-chart-line-star fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+											</i>
+										</span>
+										<span class="menu-title">Rdv Audit</span>
+										<span class="menu-arrow"></span>
+									</span>
+									<!--end:Menu link-->
+									<!--begin:Menu sub-->
+									<div class="menu-sub menu-sub-accordion">
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="{{ route('rdv.Qauditpartenaire') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rdv Qualifiés</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="{{ route('rdv.auditpartenaire') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Rdv Non Qualifiés</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+									</div>
+									<!--end:Menu sub-->
+								</div>
+								<!--end:Menu item-->
+
+
+
 
 
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -209,8 +258,11 @@
 
 									<!--begin:Menu link-->
 									<span class="menu-link">
-										<span class="menu-bullet">
-											<span class="bullet bullet-dot"></span>
+									<span class="menu-icon">
+											<i class="ki-duotone ki-thermometer fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
 										</span>
 										<span class="menu-title">Rdv Thermostat</span>
 										<span class="menu-arrow"></span>
@@ -254,8 +306,12 @@
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<!--begin:Menu link-->
 									<span class="menu-link">
-										<span class="menu-bullet">
-											<span class="bullet bullet-dot"></span>
+									<span class="menu-icon">
+											<i class="ki-duotone ki-chart-line-star fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+											</i>
 										</span>
 										<span class="menu-title">Rdv PV</span>
 										<span class="menu-arrow"></span>
@@ -297,8 +353,11 @@
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<!--begin:Menu link-->
 									<span class="menu-link">
-										<span class="menu-bullet">
-											<span class="bullet bullet-dot"></span>
+									<span class="menu-icon">
+											<i class="ki-duotone ki-rescue fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
 										</span>
 										<span class="menu-title">Rdv Pompe à Chaleur</span>
 										<span class="menu-arrow"></span>

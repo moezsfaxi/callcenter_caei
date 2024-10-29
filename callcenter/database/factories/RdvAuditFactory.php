@@ -2,22 +2,23 @@
 
 namespace Database\Factories;
 
+use App\Models\RdvAudit;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
-use App\Models\RdvPompeAChaleur;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RdvPompeAChaleur>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RdvAudit>
  */
-class RdvPompeAChaleurFactory extends Factory
+class RdvAuditFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    
-     protected $model = RdvPompeAChaleur::class;
+   
+   
+     protected $model = RdvAudit::class;
+
      public function definition(): array
     {
         return [

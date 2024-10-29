@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 	<!--begin::Head-->
 	<head><base href=""/>
-		<title>Saul Theme by Keenthemes</title>
+		<title>Caei Call center</title>
 		<meta charset="utf-8" />
-		<meta name="description" content="Saul HTML Free - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme" />
-		<meta name="keywords" content="Saul, bootstrap, bootstrap 5, dmin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale" content="fr_FR" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Saul HTML Free - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme" />
-		<meta property="og:url" content="https://keenthemes.com/products/saul-html-pro" />
+		<meta property="og:title" content="Callcenter" />
 		<meta property="og:site_name" content="Keenthemes | Saul HTML Free" />
-		<link rel="canonical" href="https://preview.keenthemes.com/saul-html-free" />
 		<link rel="shortcut icon" href="{{ asset('assets/media/logos/logo.png') }}" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -24,6 +20,7 @@
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
 		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	
 		<!--end::Global Stylesheets Bundle-->
@@ -31,6 +28,9 @@
 		<style>
 			#spaceten{
 			width: 4%;	
+			}
+			#app-content{
+			margin-left: 0px !important;	
 			}
 		</style>
 	</head>
@@ -176,6 +176,21 @@
 											</i>
 										</span>
 										<span class="menu-title">Statistiques</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="{{ route('admin-rdv-audit.index') }}">
+										<span class="menu-icon">
+										<i class="ki-duotone ki-abstract-24                        ">
+ 											<span class="path1"></span>
+ 											<span class="path2"></span>
+										</i>
+										</span>
+										<span class="menu-title">RDV Audit</span>
 									</a>
 									<!--end:Menu link-->
 								</div>
@@ -371,6 +386,7 @@
 		<script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
+		@vite('resources/js/app.js')
 	</body>
 	<!--end::Body-->
 </html>

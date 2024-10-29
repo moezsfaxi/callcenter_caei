@@ -19,23 +19,23 @@ class RdvPanneauxPhotovoltaiqueFactory extends Factory
     
      protected $model = RdvPanneauxPhotovoltaique::class;
      public function definition(): array
-    {
+     {
         return [
-            'agent_id' => 2, 
-            'partenaire_id' => 4, 
+            'agent_id' => $this->faker->randomElement([2,3,4,5]),
+            'partenaire_id' => $this->faker->randomElement([6,7,8,9]), 
             'nom_du_prospect' => $this->faker->name(),
             'prenom_du_prospect' => $this->faker->firstName(),
             'telephone' => $this->faker->phoneNumber(),
             'adresse' => $this->faker->address(),
             'code_postal' => $this->faker->postcode(),
             'ville' => $this->faker->city(),
-            'date_du_rdv' => $this->faker->date(),
-            'statut_de_residence' => $this->faker->word(),
+            'date_du_rdv' => $this->faker->dateTimeBetween('-6 months', 'now'),
+            'statut_de_residence' => $this->faker->randomElement(['locataire','propriétaire ']),
             'Commentaire_agent' => $this->faker->sentence(),
             'Commentaire_partenaire' => $this->faker->sentence(),
-            'classification' => null,
-            'date_classification' => $this->faker->date(),
-            'date_rappelle' => $this->faker->date(),
+            'classification' => fake()->randomElement(['NRP','Hors cible','RDV confirmé','RDV installé','Pas intéressé','RDV annulé','RDV à rappeler',null]),
+            'date_classification' => $this->faker->dateTimeBetween('-6 months', 'now'),
+            'date_rappelle' => $this->faker->dateTimeBetween('-6 months', 'now'),
         ];
     }
 }

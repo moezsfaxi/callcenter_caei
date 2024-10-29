@@ -63,4 +63,28 @@ class User extends Authenticatable
     }
 
 
+    public function rdvPanneauxPhotovoltaiquesp()
+    {
+        return $this->hasMany(RdvPanneauxPhotovoltaique::class, 'partenaire_id');
+    }
+
+    public function rdvPompeAChaleursp()
+    {
+        return $this->hasMany(RdvPompeAChaleur::class, 'partenaire_id');
+    }
+
+    public function rdvThermostatsp()
+    {
+        return $this->hasMany(RdvThermostat::class, 'partenaire_id');
+    }
+
+
+
+
+
+
+
+
+
+
 }

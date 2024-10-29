@@ -58,9 +58,9 @@
                                     <th class="min-w-100px">Téléphone</th>
                                     <th class="min-w-150px">Adresse</th>
                                     <th class="min-w-70px">Code Postal</th>
-                                    <th class="min-w-100px">Ville</th>
+                                    <!-- <th class="min-w-100px">Ville</th> -->
                                     <th class="min-w-100px">Date du RDV</th>
-                                    <th class="min-w-100px">Statut de résidence</th>
+                                    <!-- <th class="min-w-100px">Statut de résidence</th> -->
                                     <th class="min-w-100px">Affecter</th>
                                     <th class="min-w-100px">Actions</th>
                                 </tr>
@@ -73,9 +73,9 @@
                                     <td>{{ $rdv->telephone }}</td>
                                     <td>{{ $rdv->adresse }}</td>
                                     <td>{{ $rdv->code_postal }}</td>
-                                    <td>{{ $rdv->ville }}</td>
+                                    <!-- <td>{{ $rdv->ville }}</td> -->
                                     <td>{{ $rdv->date_du_rdv }}</td>
-                                    <td>{{ $rdv->statut_de_residence }}</td>
+                                    <!-- <td>{{ $rdv->statut_de_residence }}</td> -->
                                     <td>
                                         @if($rdv->partenaire_id)
                                             {{ $rdv->partenaire->name }}
@@ -133,41 +133,24 @@
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="fw-bolder">Détails du rendez-vous thermostat</h2>
+                <h2 class="fw-bolder">Détails du Rendez-vous Pompe à chaleur</h2>
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_details_scroll_{{ $rdv->id }}" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_details_header_{{ $rdv->id }}" data-kt-scroll-wrappers="#kt_modal_details_scroll_{{ $rdv->id }}" data-kt-scroll-offset="300px">
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Nom:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->nom_du_prospect }}" readonly />
+                <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Date prise rdv </label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->created_at }}" readonly />
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Prénom:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->prenom_du_prospect }}" readonly />
-                    </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Téléphone:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->telephone }}" readonly />
-                    </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Adresse:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->adresse }}" readonly />
-                    </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Code Postal:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->code_postal }}" readonly />
-                    </div>
+
+
                     <div class="fv-row mb-7">
                         <label class="fw-semibold fs-6 mb-2">Ville:</label>
                         <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->ville }}" readonly />
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Date du RDV:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->date_du_rdv }}" readonly />
-                    </div>
+
                     <div class="fv-row mb-7">
                         <label class="fw-semibold fs-6 mb-2">Statut de résidence:</label>
                         <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->statut_de_residence }}" readonly />

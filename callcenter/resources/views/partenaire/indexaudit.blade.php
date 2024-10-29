@@ -1,6 +1,5 @@
 @extends('partenaire.test')
 
-
 @section('content')
 <!--begin::Main-->
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -15,7 +14,7 @@
                     <!--begin::Page title-->
                     <div class="page-title d-flex flex-column gap-1 me-3 mb-2">
                         <!--begin::Title-->
-                        <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bolder fs-1 lh-0">Rendez-vous Pompe Non qualifié</h1>
+                        <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bolder fs-1 lh-0">Rendez-vous Audit Non qualifié</h1>
                         <!--end::Title-->
                     </div>
                     <!--end::Page title-->
@@ -68,6 +67,8 @@
                                     <!-- <th class="min-w-100px">Statut de résidence</th> -->
                                     <!-- <th class="min-w-100px">Commentaire agent</th> -->
                                     <th class="min-w-100px">Qualification</th>
+                                    <th class="min-w-100px" >voir plus</th>
+
                                 </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
@@ -99,14 +100,13 @@
                                                             <h5 class="modal-title" id="qualifyModalLabel{{ $rdv->id }}">Qualifier le rendez-vous</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <form id="qualifyForm{{ $rdv->id }}" action="{{ route('rdv-pompe-a-chaleur.update', $rdv->id) }}" method="POST">
+                                                        <form id="qualifyForm{{ $rdv->id }}" action="{{ route('rdv-panneaux-photovoltaique.update', $rdv->id) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="modal-body">
                                                                 <div class="mb-3">
                                                                     <label for="classification" class="form-label">Classification</label>
                                                                     <select class="form-select" id="classification" name="classification" required>
-                                                                        <option value="">Sélectionner une classification</option>
                                                                         <option value="NRP">NRP</option>
                                                                         <option value="Hors cible">Hors cible</option>
                                                                         <option value="RDV confirmé">RDV confirmé</option>
@@ -135,6 +135,9 @@
                                             </div>
                                         @endif
                                     </td>
+                                    <td><a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_view_details_{{ $rdv->id }}"> Voir détails</a> </td>
+
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -165,6 +168,7 @@
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
             </div>
+           
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
                 </div>
@@ -172,6 +176,7 @@
         </div>
     </div>
 </div> -->
+
 @foreach($rdvRecords as $rdv)
 <!-- Modal pour afficher les détails -->
 <div class="modal fade" id="kt_modal_view_details_{{ $rdv->id }}" tabindex="-1" aria-hidden="true">
@@ -219,7 +224,7 @@
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
             </div>
-            <form id="editForm{{ $rdv->id }}" action="{{ route('rdv-pv.updatequalification', $rdv->id) }}" method="POST">
+            <form id="editForm{{ $rdv->id }}" action="{{ route('rdv-audit.updatequalification', $rdv->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
@@ -261,6 +266,8 @@
 
 
 
+
+
 @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -296,6 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script> -->
+
 
 
 <!-- second script  -->
@@ -336,6 +344,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 @endsection
-

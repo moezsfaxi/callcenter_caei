@@ -13,6 +13,6 @@ class RdvThermostatSeeder extends Seeder
      */
     public function run(): void
     {
-        RdvThermostat::factory()->count(10)->create();
+        RdvThermostat::factory()->count(150)->create();
     }
 }

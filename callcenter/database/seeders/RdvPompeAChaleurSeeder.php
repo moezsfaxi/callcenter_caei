@@ -13,6 +13,6 @@ class RdvPompeAChaleurSeeder extends Seeder
      */
     public function run(): void
     {
-        RdvPompeAChaleur::factory()->count(10)->create();
+        RdvPompeAChaleur::factory()->count(150)->create();
     }
 }

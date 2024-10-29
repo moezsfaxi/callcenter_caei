@@ -42,6 +42,8 @@
                                     <span class="path2"></span>
                                 </i>
                                 <input type="text" id="filteringbyname" class="form-control form-control-solid w-250px ps-12" placeholder="Rechercher un rendez-vous" />
+                                <span class="text-start text-black-400 fw-bold fs-7 text-uppercase gs-0 ms-3 me-3 text-dark">filtrer par jour:</span>
+                                <input type="date" id="filteringbydate" lang="fr" class="form-control form-control-solid w-250px ps-12" placeholder="Filter by Date" />
                             </div>
                             <!--end::Search-->
                         </div>
@@ -60,11 +62,13 @@
                                     <th class="min-w-100px">Téléphone</th>
                                     <th class="min-w-150px">Adresse</th>
                                     <th class="min-w-70px">Code Postal</th>
-                                    <th class="min-w-100px">Ville</th>
+                                    <!-- <th class="min-w-100px">Ville</th> -->
                                     <th class="min-w-100px">Date du RDV</th>
-                                    <th class="min-w-100px">Statut de résidence</th>
-                                    <th class="min-w-100px">Commentaire agent</th>
+                                    <!-- <th class="min-w-100px">Statut de résidence</th> -->
+                                    <!-- <th class="min-w-100px">Commentaire agent</th> -->
                                     <th class="min-w-100px">Qualification</th>
+                                    <th class="min-w-100px" >voir plus</th>
+
                                 </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
@@ -76,10 +80,10 @@
                                     <td>{{ $rdv->telephone }}</td>
                                     <td>{{ $rdv->adresse }}</td>
                                     <td>{{ $rdv->code_postal }}</td>
-                                    <td>{{ $rdv->ville }}</td>
+                                    <!-- <td>{{ $rdv->ville }}</td> -->
                                     <td>{{ $rdv->date_du_rdv }}</td>
-                                    <td>{{ $rdv->statut_de_residence }}</td>
-                                    <td>{{ $rdv->Commentaire_agent }}</td>
+                                    <!-- <td>{{ $rdv->statut_de_residence }}</td> -->
+                                    <!-- <td>{{ $rdv->Commentaire_agent }}</td> -->
                                     <td>
                                         @if($rdv->qualification)
                                             {{ $rdv->qualification }}
@@ -131,6 +135,9 @@
                                             </div>
                                         @endif
                                     </td>
+                                    <td><a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_view_details_{{ $rdv->id }}"> Voir détails</a> </td>
+
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -152,7 +159,27 @@
 <!--end::Main-->
 
 <!-- Modal pour afficher les détails (y compris le commentaire) -->
-<div class="modal fade" id="kt_modal_view_details" tabindex="-1" aria-hidden="true">
+<!-- <div class="modal fade" id="kt_modal_view_details" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="fw-bolder">Détails du rendez-vous</h2>
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                </div>
+            </div>
+           
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+@foreach($rdvRecords as $rdv)
+<!-- Modal pour afficher les détails -->
+<div class="modal fade" id="kt_modal_view_details_{{ $rdv->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header">
@@ -162,14 +189,84 @@
                 </div>
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <!-- Contenu des détails du rendez-vous, y compris le commentaire -->
-                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                    <!-- Ajoutez ici les détails du rendez-vous, y compris le champ Commentaire_agent -->
+                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_details_scroll_{{ $rdv->id }}" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_details_header_{{ $rdv->id }}" data-kt-scroll-wrappers="#kt_modal_details_scroll_{{ $rdv->id }}" data-kt-scroll-offset="300px">
+
+
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Ville:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->ville }}" readonly />
+                    </div>
+
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Statut de résidence:</label>
+                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->statut_de_residence }}" readonly />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="fw-semibold fs-6 mb-2">Commentaire agent:</label>
+                        <textarea class="form-control form-control-solid mb-3 mb-lg-0" rows="3" readonly>{{ $rdv->Commentaire_agent }}</textarea>
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal pour modifier le RDV -->
+<div class="modal fade" id="kt_modal_edit_rdv_{{ $rdv->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="fw-bolder">Modifier le rendez-vous</h2>
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                </div>
+            </div>
+            <form id="editForm{{ $rdv->id }}" action="{{ route('rdv-pv.updatequalification', $rdv->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_edit_rdv_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_edit_rdv_header" data-kt-scroll-wrappers="#kt_modal_edit_rdv_scroll" data-kt-scroll-offset="300px">
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Classification</label>
+                            <select class="form-select form-select-solid" name="classification" required>
+                                <option value="">Sélectionner une classification</option>
+                                <option value="NRP" {{ $rdv->classification == 'NRP' ? 'selected' : '' }}>NRP</option>
+                                <option value="Hors cible" {{ $rdv->classification == 'Hors cible' ? 'selected' : '' }}>Hors cible</option>
+                                <option value="RDV confirmé" {{ $rdv->classification == 'RDV confirmé' ? 'selected' : '' }}>RDV confirmé</option>
+                                <option value="RDV installé" {{ $rdv->classification == 'RDV installé' ? 'selected' : '' }}>RDV installé</option>
+                                <option value="Pas intéressé" {{ $rdv->classification == 'Pas intéressé' ? 'selected' : '' }}>Pas intéressé</option>
+                                <option value="RDV annulé" {{ $rdv->classification == 'RDV annulé' ? 'selected' : '' }}>RDV annulé</option>
+                                <option value="RDV à rappeler" {{ $rdv->classification == 'RDV à rappeler' ? 'selected' : '' }}>RDV à rappeler</option>
+                            </select>
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="fw-semibold fs-6 mb-2">Commentaire partenaire</label>
+                            <textarea class="form-control form-control-solid mb-3 mb-lg-0" name="Commentaire_partenaire" rows="4">{{ $rdv->Commentaire_partenaire }}</textarea>
+                        </div>
+                        <div class="fv-row mb-7">
+                            <label class="fw-semibold fs-6 mb-2">Date de rappel</label>
+                            <input type="datetime-local" class="form-control form-control-solid mb-3 mb-lg-0" name="date_rappelle" value="{{ $rdv->date_rappelle ? date('Y-m-d\TH:i', strtotime($rdv->date_rappelle)) : '' }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@endforeach
+
+
+
+
 
 @if(session('success'))
     <div class="alert alert-success">
@@ -177,7 +274,7 @@
     </div>
 @endif
 
-<script>
+<!-- <script>
     // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Get the search input element
@@ -205,5 +302,45 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+</script> -->
+
+<!-- second script  -->
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('filteringbyname');
+    const dateInput = document.getElementById('filteringbydate');
+
+    
+    function filterTable() {
+        const nameQuery = searchInput.value.toLowerCase();
+        const dateQuery = dateInput.value;
+
+        const tableRows = document.querySelectorAll('tbody tr');
+
+        tableRows.forEach(row => {
+            const prospectName = row.querySelector('td:first-child').textContent.toLowerCase();
+            const rdvDate = row.querySelector('td:nth-child(6)').textContent.trim();
+
+            const matchesName = prospectName.includes(nameQuery);
+            const matchesDate = !dateQuery || rdvDate === dateQuery;
+
+            if (matchesName && matchesDate) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    
+    searchInput.addEventListener('input', filterTable);
+    dateInput.addEventListener('input', filterTable);
+});
 </script>
+
+
+
+
 @endsection

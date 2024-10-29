@@ -2,17 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\RdvPanneauxPhotovoltaique;
+use App\Models\RdvAudit;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RdvPanneauxPhotovoltaiqueSeeder extends Seeder
+class RdvAuditSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        RdvPanneauxPhotovoltaique::factory()->count(150)->create();
+        RdvAudit::factory()->count(150)->create();
+
     }
 }

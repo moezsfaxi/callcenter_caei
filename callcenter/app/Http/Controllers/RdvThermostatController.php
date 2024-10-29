@@ -62,9 +62,9 @@ class RdvThermostatController extends Controller
 {
 
     $validatedData = $request->validate([
-        'Commentaire_partenaire' => 'required|string',
+        'Commentaire_partenaire' => 'nullable|string',
         'classification' => 'required|string',
-        'date_rappelle' => 'date',
+        'date_rappelle' => 'nullable|date',
     ]);
 
     $rdv = RdvThermostat::findOrFail($id);
@@ -137,7 +137,7 @@ public function getRdvForPartenaireQualifier()
     // Récupère les RDV qualifiés pour le partenaire
     $rdvRecords = RdvThermostat::where('partenaire_id', $userId)
         ->whereNotNull('classification') // Filtre pour les RDV qualifiés
-        ->paginate(20); // Ajoute la pagination, 20 éléments par page
+        ->paginate(1000); // Ajoute la pagination, 20 éléments par page
 
     return view('partenaire.rdvqualifierthermostat', compact('rdvRecords')); // Renvoie la vue avec les RDV qualifiés
 }
@@ -149,7 +149,7 @@ public function getRdvForPartenaire()
     $rdvRecords = RdvThermostat::where('partenaire_id', $userId)
         ->whereNull('classification') 
         ->orderBy('created_at', 'desc')
-        ->paginate(20); 
+        ->paginate(1000); 
 
     return view('partenaire.indexthermostat', compact('rdvRecords'));
 }

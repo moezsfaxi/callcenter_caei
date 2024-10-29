@@ -42,6 +42,8 @@
                                     <span class="path2"></span>
                                 </i>
                                 <input type="text" id="filteringbyname" class="form-control form-control-solid w-250px ps-12" placeholder="Rechercher un rendez-vous" />
+                                <span class="text-start text-black-400 fw-bold fs-7 text-uppercase gs-0 ms-3 me-3 text-dark">filtrer par jour:</span>
+                                <input type="date" id="filteringbydate" lang="fr" class="form-control form-control-solid w-250px ps-12" placeholder="Filter by Date" /> 
                             </div>
                             <!--end::Search-->
                         </div>
@@ -59,9 +61,9 @@
                                     <th class="min-w-100px">Téléphone</th>
                                     <th class="min-w-150px">Adresse</th>
                                     <th class="min-w-70px">Code Postal</th>
-                                    <th class="min-w-100px">Ville</th>
+                                    <!-- <th class="min-w-100px">Ville</th> -->
                                     <th class="min-w-100px">Date du RDV</th>
-                                    <th class="min-w-100px">Statut de résidence</th>
+                                    <!-- <th class="min-w-100px">Statut de résidence</th> -->
                                     <th class="min-w-100px">Quallification</th>
                                     <th class="min-w-100px">Actions</th>
                                 </tr>
@@ -84,9 +86,9 @@
                                     <td>{{ $rdv->telephone }}</td>
                                     <td>{{ $rdv->adresse }}</td>
                                     <td>{{ $rdv->code_postal }}</td>
-                                    <td>{{ $rdv->ville }}</td>
+                                    <!-- <td>{{ $rdv->ville }}</td> -->
                                     <td>{{ $rdv->date_du_rdv }}</td>
-                                    <td>{{ $rdv->statut_de_residence }}</td>
+                                    <!-- <td>{{ $rdv->statut_de_residence }}</td> -->
                                     <td>{{ $rdv->classification }}</td>
                                     <td>
                                         <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -135,34 +137,13 @@
             </div>
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll_{{ $rdv->id }}" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header_{{ $rdv->id }}" data-kt-scroll-wrappers="#kt_modal_add_user_scroll_{{ $rdv->id }}" data-kt-scroll-offset="300px">
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Nom:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->nom_du_prospect }}" readonly />
-                    </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Prénom:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->prenom_du_prospect }}" readonly />
-                    </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Téléphone:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->telephone }}" readonly />
-                    </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Adresse:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->adresse }}" readonly />
-                    </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Code Postal:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->code_postal }}" readonly />
-                    </div>
+
+
                     <div class="fv-row mb-7">
                         <label class="fw-semibold fs-6 mb-2">Ville:</label>
                         <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->ville }}" readonly />
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Date du RDV:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->date_du_rdv }}" readonly />
-                    </div>
+
                     <div class="fv-row mb-7">
                         <label class="fw-semibold fs-6 mb-2">Statut de résidence:</label>
                         <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->statut_de_residence }}" readonly />
@@ -175,10 +156,7 @@
                         <label class="fw-semibold fs-6 mb-2">Commentaire partenaire:</label>
                         <textarea class="form-control form-control-solid mb-3 mb-lg-0" rows="3" readonly>{{ $rdv->Commentaire_partenaire }}</textarea>
                     </div>
-                    <div class="fv-row mb-7">
-                        <label class="fw-semibold fs-6 mb-2">Classification:</label>
-                        <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->classification }}" readonly />
-                    </div>
+
                     <div class="fv-row mb-7">
                         <label class="fw-semibold fs-6 mb-2">Date de rappel:</label>
                         <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $rdv->date_rappelle }}" readonly />
@@ -242,7 +220,7 @@
         {{ session('success') }}
     </div>
 @endif
-<script>
+<!-- <script>
     // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Get the search input element
@@ -270,7 +248,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+</script> -->
+
+
+
+<!-- second script  -->
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('filteringbyname');
+    const dateInput = document.getElementById('filteringbydate');
+
+    
+    function filterTable() {
+        const nameQuery = searchInput.value.toLowerCase();
+        const dateQuery = dateInput.value;
+
+        const tableRows = document.querySelectorAll('tbody tr');
+
+        tableRows.forEach(row => {
+            const prospectName = row.querySelector('td:first-child').textContent.toLowerCase();
+            const rdvDate = row.querySelector('td:nth-child(6)').textContent.trim();
+
+            const matchesName = prospectName.includes(nameQuery);
+            const matchesDate = !dateQuery || rdvDate === dateQuery;
+
+            if (matchesName && matchesDate) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    
+    searchInput.addEventListener('input', filterTable);
+    dateInput.addEventListener('input', filterTable);
+});
 </script>
+
 
 
 @endsection

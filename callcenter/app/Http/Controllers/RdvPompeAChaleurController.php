@@ -14,6 +14,7 @@ class RdvPompeAChaleurController extends Controller
     public function index()
     {
         $rdvRecords = RdvPompeAChaleur::orderBy('created_at', 'desc')->paginate(20);
+       
         $partenaires = User::where('role', 'partenaire')->get();
 
         return view('superviseur.indexpompe-a-chaleur', compact('rdvRecords', 'partenaires'));
@@ -57,7 +58,7 @@ class RdvPompeAChaleurController extends Controller
     $validatedData = $request->validate([
         'Commentaire_partenaire' => 'nullable|string',
         'classification' => 'required|string',
-        'date_rappelle' => 'required|date',
+        'date_rappelle' => 'nullable|date',
     ]);
     $rdv = RdvPompeAChaleur::findOrFail($id);
     $rdv->update($validatedData);
@@ -89,7 +90,7 @@ public function getRdvByAgent()
             $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)
             ->whereNull('classification') // Filtre pour les RDV non qualifiés
             ->orderBy('created_at', 'desc')
-            ->paginate(20); // Ajoute la pagination, 20 éléments par page
+            ->paginate(1000); // Ajoute la pagination, 20 éléments par page
         return view('partenaire.indexpompeachaleur', compact('rdvRecords'));
     }
     public function assignrdv(Request $request, $id)
@@ -117,7 +118,7 @@ public function getRdvByAgent()
         $rdvRecords = RdvPompeAChaleur::where('partenaire_id', $userId)
                     ->whereNotNull('classification')  // Pour les RDV qualifiés
                     ->orderBy('created_at', 'desc')
-                    ->paginate(20); // Ajoute la pagination, 20 éléments par page
+                    ->paginate(1000); // Ajoute la pagination, 20 éléments par page
 
         return view('partenaire.rdvqualifierpompe', compact('rdvRecords'));
     }

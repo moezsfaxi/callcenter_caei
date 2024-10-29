@@ -2,7 +2,7 @@
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href=""/>
-		<title>Saul Theme by Keenthemes</title>
+		<title>Caei Call center</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="Saul HTML Free - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme" />
 		<meta name="keywords" content="Saul, bootstrap, bootstrap 5, dmin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
@@ -176,6 +176,21 @@
 											</i>
 										</span>
 										<span class="menu-title">Statistiques</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="{{ route('rdv.auditAgent') }}">
+										<span class="menu-icon">
+											<i class="ki-duotone ki-thermometer fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+										</span>
+										<span class="menu-title">RDV Audit</span>
 									</a>
 									<!--end:Menu link-->
 								</div>
