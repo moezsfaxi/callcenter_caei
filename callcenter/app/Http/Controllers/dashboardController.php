@@ -120,7 +120,7 @@ class dashboardController extends Controller
 
 
         //dd($statistics);
-        return view('agent/dashboard', compact('statistics'));
+        return view('admin/dashboard', compact('statistics'));
     }
 
 
