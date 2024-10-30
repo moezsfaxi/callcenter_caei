@@ -36,6 +36,7 @@ class RdvPompeAChaleurFactory extends Factory
             'classification' => fake()->randomElement(['NRP','Hors cible','RDV confirmé','RDV installé','Pas intéressé','RDV annulé','RDV à rappeler',null]),
             'date_classification' => $this->faker->dateTimeBetween('-6 months', 'now'),
             'date_rappelle' => $this->faker->dateTimeBetween('-6 months', 'now'),
+            'created_at'=> $this->faker->dateTimeBetween('-6 months', 'now') ,
         ];
     }
 }

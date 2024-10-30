@@ -20,7 +20,7 @@ class RdvAuditController extends Controller
 
     public function create()
     {
-        return view('agent.createpv');
+        return view('agent.createaudit');
     }
 
 

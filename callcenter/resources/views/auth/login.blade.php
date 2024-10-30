@@ -126,7 +126,7 @@
                 <!-- Password -->
                 <div class="fv-row mb-10">
                     <div class="d-flex flex-stack mb-2">
-                        <label for="password" class="form-label fw-bold text-dark fs-6 mb-0">{{ __('Password') }}</label>
+                        <label for="password" class="form-label fw-bold text-dark fs-6 mb-0">{{ __('Mot de passe') }}</label>
                         @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}" class="link-primary fs-6 fw-bold">{{ __('Forgot Password ?') }}</a>
                         @endif
@@ -139,13 +139,13 @@
                 <div class="fv-row mb-10">
                     <label for="remember_me" class="form-check form-check-custom form-check-solid">
                         <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
-                        <span class="form-check-label fw-semibold text-gray-700 fs-6">{{ __('Remember me') }}</span>
+                        <span class="form-check-label fw-semibold text-gray-700 fs-6">{{ __('Souviens-toi de moi') }}</span>
                     </label>
                 </div>
 
                 <div class="text-center">
                     <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5 btn-custom-login">
-                        <span class="indicator-label">{{ __('Log in') }}</span>
+                        <span class="indicator-label">{{ __('Se Connecter') }}</span>
                         <span class="indicator-progress">Please wait...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
