@@ -159,6 +159,105 @@
                 chart.render();
             }
         </script>
+
+
+
+
+<!-- second script -->
+
+        <!-- <script>
+    const dailyDates = {!! json_encode(array_keys($statistics['rdvPanneaux']['daily'])) !!};
+    const panneauxData = {!! json_encode(array_values($statistics['rdvPanneaux']['daily'])) !!};
+    const pompeData = {!! json_encode(array_values($statistics['rdvPompe']['daily'])) !!};
+    const thermostatData = {!! json_encode(array_values($statistics['rdvThermostat']['daily'])) !!};
+    const auditData = {!! json_encode(array_values($statistics['rdvAudit']['daily'])) !!};
+
+    const options = {
+        chart: {
+            type: "line",
+            height: "300",
+            fontFamily: "Inter, sans-serif",
+            toolbar: {
+                show: false
+            },
+        },
+        series: [
+            {
+                name: "Thermostat",
+                data: thermostatData,
+                color: "#24D26D"
+            },
+            {
+                name: "Pompe à Chaleur",
+                data: pompeData,
+                color: "#FCFE19"
+            },
+            {
+                name: "Panneaux Photovoltaïques",
+                data: panneauxData,
+                color: "#0594D0"
+            },
+            {
+                name: "Audit",
+                data: auditData,
+                color: "#fe2419"
+            }
+        ],
+        xaxis: {
+            categories: dailyDates,
+            labels: {
+                style: {
+                    fontFamily: "Inter, sans-serif"
+                }
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Nombre de RDVs'
+            }
+        },
+        grid: {
+            show: true,
+            strokeDashArray: 4
+        },
+        legend: {
+            show: true
+        }
+    };
+
+    let chart = null;
+
+    function initializeChart() {
+        if (chart) {
+            chart.destroy();
+        }
+        chart = new ApexCharts(document.getElementById("daily-rdv-chart"), options);
+        chart.render();
+    }
+
+    if (document.getElementById("daily-rdv-chart") && typeof ApexCharts !== 'undefined') {
+        initializeChart();
+    }
+
+    // Optional: only use this function if manual re-rendering is required
+    function refreshChart() {
+        initializeChart();
+    }
+</script> -->
+
+
+
+
+
+
+
+
+
+       
+
     </body>
     <script src="{{ asset('tailwindcharts/js/apexcharts.js') }}"></script>
     <script src="{{ asset('tailwindcharts/js/flowbite.min.js') }}"></script>
