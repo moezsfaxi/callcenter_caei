@@ -51,6 +51,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(RdvPanneauxPhotovoltaique::class, 'agent_id');
     }
+    public function rdvAudits()
+    {
+        return $this->hasMany(RdvAudit::class, 'agent_id');
+    }
 
     public function rdvPompeAChaleurs()
     {
@@ -61,8 +65,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(RdvThermostat::class, 'agent_id');
     }
-
-
     public function rdvPanneauxPhotovoltaiquesp()
     {
         return $this->hasMany(RdvPanneauxPhotovoltaique::class, 'partenaire_id');
@@ -73,18 +75,15 @@ class User extends Authenticatable
         return $this->hasMany(RdvPompeAChaleur::class, 'partenaire_id');
     }
 
+    public function rdvAuditsp()
+    {
+        return $this->hasMany(RdvAudit::class, 'partenaire_id');
+    }
+
     public function rdvThermostatsp()
     {
         return $this->hasMany(RdvThermostat::class, 'partenaire_id');
     }
-
-
-
-
-
-
-
-
 
 
 }

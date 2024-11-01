@@ -127,9 +127,7 @@
                 <div class="fv-row mb-10">
                     <div class="d-flex flex-stack mb-2">
                         <label for="password" class="form-label fw-bold text-dark fs-6 mb-0">{{ __('Mot de passe') }}</label>
-                        @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="link-primary fs-6 fw-bold">{{ __('Forgot Password ?') }}</a>
-                        @endif
+
                     </div>
                     <input id="password" class="form-control form-control-lg form-control-solid" type="password" name="password" required autocomplete="current-password" />
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
