@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
 
@@ -34,6 +37,7 @@ class PostController extends Controller
            $validatedData = $request->validate([
                'post_text' => 'required|string',
                //'post_image' => 'nullable|image|mimes:jpg,png,jpeg,gif',
+               'post_video' => 'nullable',
                'post_image' => 'nullable',
                'agent' => 'required|in:yes,no',
                'superviseur' => 'required|in:yes,no',
@@ -46,11 +50,17 @@ class PostController extends Controller
  
                $imagePath = $request->file('post_image')->store('posts', 'public');
            }
+
+           $videoPath = null;
+           if ($request->hasFile('post_video')) {
+               $videoPath = $request->file('post_video')->store('posts/videos', 'public'); 
+           }
        
           
            Post::create([
                'post_text' => $validatedData['post_text'],
                'post_image' => $imagePath,
+               'post_video' => $videoPath,
                'agent' => $validatedData['agent'],
                'superviseur' => $validatedData['superviseur'],
                'partenaire' => $validatedData['partenaire'],
@@ -106,6 +116,50 @@ class PostController extends Controller
    
    
        } 
+
+       public function like(Request $request, $postId)
+{
+    //dd($postId);
+    $post = Post::findOrFail($postId);
+    $userId = Auth::id();
+
+    $like = Like::where('post_id', $postId)->where('user_id', $userId)->first();
+
+    if ($like) {
+        $like->delete();
+        return response()->json(['status' => 'unliked']);
+    } else {
+        Like::create(['post_id' => $postId, 'user_id' => $userId]);
+        return response()->json(['status' => 'liked']);
+    }
+}
+public function commentstore(Request $request, $postId)
+{
+    $post = Post::findOrFail($postId);
+    $user = Auth::user();
+
+    $comment = new Comment;
+    $comment->post_id = $post->id;
+    $comment->user_id = $user->id;
+    $comment->content = $request->content; 
+    $comment->save();
+
+    return response()->json([
+        'image_de_profil' => $user->image_de_profil,
+        'name'    => $user->name ,
+        'comment' => $comment,
+        'status' => 'success'
+    ]);
+}
+
+
+
+
+
+
+
+
+
 
 
 

@@ -23,7 +23,11 @@
 
             <div class="mb-3">
                 <label for="post_image" class="form-label">L'image du post (optionnel)</label>
-                <input class="form-control" type="file" id="post_image" name="post_image" accept="image/*">
+                <input class="form-control" type="file" id="post_image" name="post_image" accept="image/*" onchange="toggleMedia('image')">
+            </div>
+            <div class="mb-3">
+                <label for="post_video" class="form-label">Vidéo du post (optionnel)</label>
+                <input class="form-control" type="file" id="post_video" name="post_video" accept="video/*" onchange="toggleMedia('video')" >
             </div>
 
             <!-- Dropdown for 'agent' field -->
@@ -59,6 +63,21 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function toggleMedia(type) {
+        const imageInput = document.getElementById('post_image');
+        const videoInput = document.getElementById('post_video');
+
+        if (type === 'image' && imageInput.files.length > 0) {
+            videoInput.disabled = true;
+        } else if (type === 'video' && videoInput.files.length > 0) {
+            imageInput.disabled = true;
+        } else {
+            imageInput.disabled = false;
+            videoInput.disabled = false;
+        }
+    }
+</script>
 </body>
 </html>
 @endsection

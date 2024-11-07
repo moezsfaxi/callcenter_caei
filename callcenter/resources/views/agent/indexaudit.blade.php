@@ -159,7 +159,7 @@
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
             </div>
-            <form action="{{ route('rdv.panneaux.update', $rdv->id) }}" method="POST">
+            <form action="{{ route('rdv.audit.update', $rdv->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">

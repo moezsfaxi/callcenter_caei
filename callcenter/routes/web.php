@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\AutorisationController;
+use App\Http\Controllers\AvanceController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -9,6 +11,7 @@ use App\Http\Controllers\RdvPanneauxPhotovoltaiqueController;
 use App\Http\Controllers\RdvPompeAChaleurController;
 use App\Http\Controllers\RdvThermostatController;
 use App\Http\Controllers\UserController;
+use App\Models\Avance;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[AuthenticatedSessionController::class, 'create'] )->name('first-page');
@@ -22,6 +25,17 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth','agent'])->group(function(){
+
+
+// Demande d'autorisation and Demande d'avance
+
+Route::get('/autorisation', [AutorisationController::class, 'index'])->name('autorisation.index');
+Route::post('/autorisation', [AutorisationController::class, 'store'])->name('autorisation.store');
+
+Route::get('/avance', [AvanceController::class, 'index'])->name('avance.index');
+Route::post('/avance', [AvanceController::class, 'store'])->name('avance.store');
+
+
 
 Route::get('/feed-agent',[PostController::class ,'agentpost'])->name('agent-post');
 Route::get('agent/dashboard',[dashboardController::class ,'agentdashboard'] )->name('agent-dashboard-login');
@@ -93,6 +107,15 @@ Route::middleware(['auth','superviseur'])->group(function(){
     Route::put('/rdv-panneaux/{id}', [RdvPanneauxPhotovoltaiqueController::class, 'updateRdvPanneau'])->name('rdv.panneaux.update');
     Route::put('/rdv-audit/{id}', [RdvAuditController::class, 'updateRdvPanneau'])->name('rdv.audit.update');
 
+    //autorisation
+    Route::get('/autorisation/superviseur', [AutorisationController::class, 'indexsuperviseur'])->name('autorisation.index-sup');
+    Route::put('/autorisations/{id}/update-etat', [AutorisationController::class, 'updateEtat'])->name('autorisations.updateEtat');
+
+
+    Route::get('/avance/superviseur', [AvanceController::class, 'indexsuperviseur'])->name('avance.index-sup');
+    Route::put('/avance/{id}/update-etat', [AvanceController::class, 'updateEtat'])->name('avance.updateEtat');
+
+
 
 });
 
@@ -116,14 +139,20 @@ Route::middleware(['auth','admin'])->group(function(){
     Route::delete('/deletepost/{id}',[PostController::class , 'destroy'])->name('delete-post');
     Route::get('/posts/{id}/edit', [PostController::class, 'gotoeditview'])->name('edit-post');
     Route::put('/updatepost',[PostController::class,'update'])->name('update-post');
+    Route::get('/autorisation/admin', [AutorisationController::class, 'indexadmin'])->name('autorisation.index-admin');
+    Route::put('/autorisations/{id}/update-etatadmin', [AutorisationController::class, 'updateEtat'])->name('autorisations.updateEtatadmin');
 
-
+    Route::get('/avance/admin', [AvanceController::class, 'indexadmin'])->name('avance.index-admin');
+    Route::put('/avance/{id}/update-etatadmin', [AvanceController::class, 'updateEtat'])->name('avance.updateEtatadmin');
 
 
 });
 
 Route::get('/user/edit/{id}',[ProfileController::class,'edittheuser'])->name('user.edit-foryou');
 Route::put('/user/edit/{id}',[ProfileController::class,'updateallusers'])->name('user.edit-every-field');
+
+Route::post('/post/{postId}/comment', [PostController::class, 'commentstore'])->name('post.comment');
+Route::post('/post/{postId}/like', [PostController::class, 'like'])->name('post.like');
 
 
 

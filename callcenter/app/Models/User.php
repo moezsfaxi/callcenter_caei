@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Support\Facades\Auth;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -84,6 +85,57 @@ class User extends Authenticatable
     {
         return $this->hasMany(RdvThermostat::class, 'partenaire_id');
     }
+    
+    
+    //number of rdv
+    
+    public function numberofrdvaudit(){
+
+      return RdvAudit::where('partenaire_id',Auth::id())
+      ->whereNull('classification')
+      ->count();  
+
+    }
+    public function numberofrdvpv(){
+        return RdvPanneauxPhotovoltaique::where('partenaire_id',Auth::id())
+        ->whereNull('classification')
+        ->count(); 
+        
+    }
+    public function numberofrdvthermostat(){
+        return RdvThermostat::where('partenaire_id',Auth::id())
+        ->whereNull('classification')
+        ->count(); 
+        
+    }
+    public function numberofrdvpac(){
+        return RdvPompeAChaleur::where('partenaire_id',Auth::id())
+        ->whereNull('classification')
+        ->count(); 
+        
+    }
+
+
+
+    ///comments and likes
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
+    // public function likes()
+    // {
+    //     return $this->hasMany(Like::class);
+    // }
+    public function likes()
+{
+    return $this->belongsToMany(Post::class, 'likes')->withTimestamps();
+}
+
+public function hasLiked(Post $post)
+{
+    return $this->likes->contains('id', $post->id);
+}
 
 
 }

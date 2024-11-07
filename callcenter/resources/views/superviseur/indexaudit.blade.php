@@ -83,7 +83,7 @@
                                         @if($rdv->partenaire_id)
                                             {{ $rdv->partenaire->name }}
                                         @else
-                                            <form id="assignForm{{ $rdv->id }}" action="{{ route('rdv-panneaux-photovoltaique.assignrdv', $rdv->id) }}" method="POST">
+                                            <form id="assignForm{{ $rdv->id }}" action="{{ route('rdv-audit.assignrdv', $rdv->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <select class="form-select form-select-sm" name="partenaire_id" id="partenaireSelect{{ $rdv->id }}" onchange="confirmAssign({{ $rdv->id }}, this.value, this.options[this.selectedIndex].text )">

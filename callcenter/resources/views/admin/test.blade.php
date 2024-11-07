@@ -292,6 +292,36 @@
 									<!--end:Menu link-->
 								</div>
 								<!--end:Menu item-->
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									  <a class="menu-link" href="{{ route('autorisation.index-admin') }}">
+										<span class="menu-icon">
+											<i class="ki-duotone ki-check-square fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+										</span>
+										<span class="menu-title"> Autorisation </span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									  <a class="menu-link" href="{{ route('avance.index-admin') }}">
+										<span class="menu-icon">
+											<i class="ki-duotone ki-check-square fs-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>
+										</span>
+										<span class="menu-title"> Demane d'avance </span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->
 
 
 

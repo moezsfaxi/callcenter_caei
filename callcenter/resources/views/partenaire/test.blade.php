@@ -31,6 +31,27 @@
 			#spaceten{
 			width: 4%;	
 			}
+			       
+		@keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
+        }
+
+
+        .warning {
+            background-color: #ffcccb; 
+            color: #a00; 
+            padding: 20px;
+            width: 20%;
+            border: 1px solid #a00;
+            font-weight: bold;
+            font-size: 1em;
+            text-align: center;
+            animation: blink 3s infinite;
+            
+            
+        }
+
 		</style>
 	
 	</head>
@@ -72,10 +93,29 @@
 							<!--end::Sidebar toggle-->
 						</div>
 						<!--begin::Navbar-->
+						
 						<div class="app-navbar flex-grow-1 justify-content-end" id="kt_app_header_navbar">
 							<div class="app-navbar-item d-flex align-items-stretch flex-lg-grow-1 me-2 me-lg-0">
 
+							@if( Auth::user()->numberofrdvpv()>0 )	
+							<div class="warning">⚠️ RDV non Qualifiés PV {{Auth::user()->numberofrdvpv() }}</div>
+							@endif
+
+							@if( Auth::user()->numberofrdvthermostat()>0 )
+							<div class="warning">⚠️ RDV non Qualifiés thermostat {{Auth::user()->numberofrdvthermostat() }}</div>
+							@endif
+
+							@if( Auth::user()->numberofrdvpac()>0 )
+							<div class="warning">⚠️ RDV non Qualifiés PAC {{Auth::user()->numberofrdvpac() }}</div>
+							@endif
+
+							@if( Auth::user()->numberofrdvaudit()>0 )
+							<div class="warning">⚠️ RDV non Qualifiés Audit {{Auth::user()->numberofrdvaudit() }}</div>
+							@endif
+
 							</div>
+							
+
 
 							<!--begin::User menu-->
 							<div class="app-navbar-item ms-3 ms-lg-4 me-lg-2" id="kt_header_user_menu_toggle">

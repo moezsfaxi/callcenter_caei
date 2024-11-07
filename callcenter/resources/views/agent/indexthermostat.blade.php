@@ -19,7 +19,7 @@
                     </div>
                     <!--end::Page title-->
                     <!--begin::Actions-->
-                    <a href="{{ route('rdv.panneaux-photovoltaique.create') }}" class="btn btn-sm btn-success ms-3 px-4 py-3">Créer un rendez-vous</a>
+                    <a href="{{ route('rdv.thermostat.create') }}" class="btn btn-sm btn-success ms-3 px-4 py-3">Créer un rendez-vous</a>
                     <!--end::Actions-->
                 </div>
                 <!--end::Toolbar wrapper-->

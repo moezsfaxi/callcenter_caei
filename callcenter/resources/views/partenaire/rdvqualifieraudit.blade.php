@@ -72,13 +72,13 @@
                                 
                                 <tr class="
                                     @switch($rdv->classification)
-                                        @case('NRP') table-warning @break
-                                        @case('Hors cible') table-info @break
-                                        @case('RDV confirmé') table-primary @break
-                                        @case('RDV installé') table-success @break
-                                        @case('Pas intéressé') table-secondary @break
-                                        @case('RDV annulé') table-danger @break
-                                        @case('RDV à rappeler') table-warning @break
+                                        @case('NRP') darkgoldforpartenaire @break
+                                        @case('Hors cible') yellowforpartenaire @break
+                                        @case('RDV confirmé') lawngreenforpartenaire @break
+                                        @case('RDV installé') greeninstallforpartenaire @break
+                                        @case('Pas intéressé') orangeforpartenaire @break
+                                        @case('RDV annulé') redforpartenaire @break
+                                        @case('RDV à rappeler') navyforpartenaire @break
                                     @endswitch
                                 ">
                                     <td>{{ $rdv->nom_du_prospect }}</td>
@@ -300,12 +300,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 @endsection
 
-<style>
+<!-- <style>
     /* Couleurs de fond plus douces */
     .table-warning { background-color: rgba(255, 243, 205, 0.5) !important; }
     .table-info { background-color: rgba(209, 236, 241, 0.5) !important; }
     .table-primary { background-color: rgba(204, 229, 255, 0.5) !important; }
-    .table-success { background-color: rgba(212, 237, 218, 0.5) !important; }
+    .table-success { background-color: green !important; }
     .table-secondary { background-color: rgba(226, 227, 229, 0.5) !important; }
     .table-danger { background-color: rgba(248, 215, 218, 0.5) !important; }
     .table-light { background-color: rgba(248, 249, 250, 0.5) !important; }
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .table-warning:hover { background-color: rgba(255, 243, 205, 0.7) !important; }
     .table-info:hover { background-color: rgba(209, 236, 241, 0.7) !important; }
     .table-primary:hover { background-color: rgba(204, 229, 255, 0.7) !important; }
-    .table-success:hover { background-color: rgba(212, 237, 218, 0.7) !important; }
+    .table-success { background-color: green !important; }
     .table-secondary:hover { background-color: rgba(226, 227, 229, 0.7) !important; }
     .table-danger:hover { background-color: rgba(248, 215, 218, 0.7) !important; }
     .table-light:hover { background-color: rgba(248, 249, 250, 0.7) !important; }
@@ -323,4 +323,44 @@ document.addEventListener('DOMContentLoaded', function() {
     .table td, .table th {
         color: #333 !important;
     }
+</style> -->
+
+
+<style>
+.greenrowpartenaire{
+ background-color: green !important;
+ color: black !important;
+}
+.redforpartenaire{
+background-color: red !important;
+color: black !important;
+}
+.greeninstallforpartenaire{
+background-color: green !important;
+color: black !important;
+}
+.yellowforpartenaire{
+    background-color: yellow !important;
+    color: black !important;
+}
+.orangeforpartenaire{
+    background-color: orange !important;
+    color: black !important;
+    
+}
+.darkgoldforpartenaire{
+    background-color: darkgoldenrod !important;
+    color: black !important;   
+
+}
+.lawngreenforpartenaire{
+    background-color: lawngreen !important;
+    color: black !important;
+
+}
+.navyforpartenaire{
+    background-color: paleturquoise !important;
+    color: black !important;  
+
+}
 </style>

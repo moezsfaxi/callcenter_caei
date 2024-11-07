@@ -265,7 +265,7 @@
 								<!--begin:Menu item-->
 								<div class="menu-item">
 									<!--begin:Menu link-->
-									  <a class="menu-link" href="#">
+									  <a class="menu-link" href="{{ route('autorisation.index')  }}">
 										<span class="menu-icon">
 											<i class="ki-duotone ki-check-square fs-1">
 												<span class="path1"></span>
@@ -281,7 +281,7 @@
 								<!--begin:Menu item-->
 								<div class="menu-item">
 									<!--begin:Menu link-->
-									 <a class="menu-link" href="#">
+									 <a class="menu-link" href="{{  route('avance.index') }}">
 										<span class="menu-icon">
 											<i class="ki-duotone ki-dollar fs-1">
 												<span class="path1"></span>
@@ -382,6 +382,8 @@
 		<script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
+		@stack('scripts')
+
 	</body>
 	<!--end::Body-->
 </html>

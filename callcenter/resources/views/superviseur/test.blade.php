@@ -257,6 +257,35 @@
 									<!--end:Menu link-->
 								</div>
 								<!--end:Menu item-->
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="{{ route('autorisation.index-sup') }}">
+										<span class="menu-icon">
+											<i class="fas fa-solar-panel fs-1"></i>
+										</span>
+										<span class="menu-title">Autorisation</span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->	
+								<!--begin:Menu item-->
+								<div class="menu-item">
+									<!--begin:Menu link-->
+									<a class="menu-link" href="{{ route('avance.index-sup') }}">
+										<span class="menu-icon">
+											<i class="fas fa-solar-panel fs-1"></i>
+										</span>
+										<span class="menu-title">Demane d'avance  </span>
+									</a>
+									<!--end:Menu link-->
+								</div>
+								<!--end:Menu item-->	
+
+
+
+
+
 							</div>
 							<!--end::Sidebar menu-->
 
