@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function create(){
      
-     $posts = Post::orderBy('created_at', 'desc')->paginate(6);
+     $posts = Post::orderBy('created_at', 'desc')->paginate(10);
      
      return View('admin.feed',compact('posts'));
 

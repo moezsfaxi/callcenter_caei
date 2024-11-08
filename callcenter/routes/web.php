@@ -139,6 +139,7 @@ Route::middleware(['auth','admin'])->group(function(){
     Route::delete('/deletepost/{id}',[PostController::class , 'destroy'])->name('delete-post');
     Route::get('/posts/{id}/edit', [PostController::class, 'gotoeditview'])->name('edit-post');
     Route::put('/updatepost',[PostController::class,'update'])->name('update-post');
+    
     Route::get('/autorisation/admin', [AutorisationController::class, 'indexadmin'])->name('autorisation.index-admin');
     Route::put('/autorisations/{id}/update-etatadmin', [AutorisationController::class, 'updateEtat'])->name('autorisations.updateEtatadmin');
 

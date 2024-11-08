@@ -173,16 +173,16 @@
             e.preventDefault(); // Prevent form submission
 
             var $form = $(this);
-            var postId = $form.find('input[name="post_id"]').val(); // Get post ID
+            var postId = $form.find('input[name="post_id"]').val(); 
             //console.log("post id =",postId);
-            var content = $form.find('textarea[name="content"]').val(); // Get comment content
+            var content = $form.find('textarea[name="content"]').val(); 
 
             $.ajax({
-                url: `/post/${postId}/comment`, // Directly construct the URL with postId
+                url: `/post/${postId}/comment`, 
                 type: 'POST',
                 data: {
-                    _token: "{{ csrf_token() }}", // CSRF token
-                    content: content // Send comment content
+                    _token: "{{ csrf_token() }}", 
+                    content: content 
                 },
                 success: function(response) {
                     

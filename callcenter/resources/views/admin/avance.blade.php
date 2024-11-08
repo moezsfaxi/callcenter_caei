@@ -43,7 +43,7 @@
         </form>
 
         <!-- Form to Refuse -->
-        <form action="{{ route('autorisations.updateEtat', $pass->id) }}" method="POST" style="display:inline;">
+        <form action="{{ route('avance.updateEtatadmin', $pass->id) }}" method="POST" style="display:inline;">
             @csrf
             @method('PUT')
             <input type="hidden" name="etat" value="refusé">
